@@ -1,13 +1,26 @@
 package isep.projet.astar.IHM;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public abstract class AbstractFloorPanel extends JPanel {
 	
-	private int movCost;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected int movCost;
 
 	public AbstractFloorPanel() {
-		// TODO Auto-generated constructor stub
+		setPreferredSize(new Dimension(20, 20));
+		Border whiteline = BorderFactory.createLineBorder(Color.white, 1);
+		this.setBorder(whiteline);
+		
+		setVisible(true);
 	}
 
 	public int getMovCost() {
@@ -17,6 +30,4 @@ public abstract class AbstractFloorPanel extends JPanel {
 	public void setMovCost(int movCost) {
 		this.movCost = movCost;
 	}
-
-
 }

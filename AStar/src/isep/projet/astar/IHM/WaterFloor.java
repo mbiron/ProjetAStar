@@ -1,9 +1,11 @@
 package isep.projet.astar.IHM;
 
+import java.awt.Point;
+
 public class WaterFloor extends AbstractFloorPanel {
 
 	public WaterFloor() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 }

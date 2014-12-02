@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
  */
 public class GridPanel extends JPanel {
 
-	List<AbstractFloorPanel> cases;
+	List<AbstractFloor> cases;
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(GridPanel.class);
 
@@ -33,7 +33,7 @@ public class GridPanel extends JPanel {
 		Border whiteline = BorderFactory.createLineBorder(Color.white, 1);
 		this.setBorder(whiteline);
 
-		cases = new ArrayList<AbstractFloorPanel>();
+		cases = new ArrayList<AbstractFloor>();
 		loadMap1();
 		this.setVisible(true);
 		log.info("coucou");
@@ -41,7 +41,7 @@ public class GridPanel extends JPanel {
 
 	public void loadMap1() {
 		int x = 0, y = 0;
-		AbstractFloorPanel pan;
+		AbstractFloor pan;
 		for (int i = 0; i < 900; i++) {
 			if (x > 30) {
 				x = 0;

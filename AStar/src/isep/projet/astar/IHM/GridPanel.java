@@ -13,7 +13,7 @@ import javax.swing.border.Border;
 import org.apache.log4j.Logger;
 
 /**
- * This panel represent the grid made of different kind of panels (= different
+ * This panel represents the grid made of different kind of panels (= different
  * movement cost)
  * 
  * @author maxime
@@ -43,18 +43,29 @@ public class GridPanel extends JPanel {
 		int x = 0, y = 0;
 		AbstractFloor pan;
 		for (int i = 0; i < 900; i++) {
-			if (x > 30) {
+			Point p = new Point(x, y);
+	
+			if ( (y == 1 && x == 0) || (y == 2 && x == 0)) {
+				pan = new WaterFloor();
+			} else if (x == 1 && y == 2) {
+				pan = new ForestFloor();
+			} else if(y ==0){
+				pan = new Wall();
+			}else if(y ==6){
+				pan = new SandFloor();
+			}else {
+			
+				pan = new RockFloor();
+			}
+			pan.setLocation(p);
+			this.add(pan);
+			cases.add(pan);
+			if (x == 29) {
 				x = 0;
 				y++;
 			} else {
 				x++;
 			}
-			pan = new RockFloor();
-			pan.setLocation(new Point(x, y));
-			this.add(pan);
-			cases.add(pan);
-
 		}
 	}
-
 }

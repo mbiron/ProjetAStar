@@ -16,17 +16,21 @@ import javax.swing.WindowConstants;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private GridPanel gridPanel;
+	private GridPanel map = null;
 
 	public MainFrame() throws HeadlessException {
-		gridPanel = new GridPanel();
-		
-		this.add(gridPanel);
-
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(700, 700));
 
-		
+		pack();
+	}
+
+	public void setMap(GridPanel newMap) {
+		if (map != null) {
+			remove(map);
+		}
+		this.map = newMap;
+		add(map);
 		pack();
 	}
 

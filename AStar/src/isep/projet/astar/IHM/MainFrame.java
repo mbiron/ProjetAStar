@@ -1,5 +1,7 @@
 package isep.projet.astar.IHM;
 
+import isep.projet.astar.Data.Constants;
+
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 
@@ -20,7 +22,7 @@ public class MainFrame extends JFrame {
 
 	public MainFrame() throws HeadlessException {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setMinimumSize(new Dimension(700, 700));
+		setMinimumSize(new Dimension(Constants.MAIN_FRAME_SIDE, Constants.MAIN_FRAME_SIDE));
 
 		pack();
 	}

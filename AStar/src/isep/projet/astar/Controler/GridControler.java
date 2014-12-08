@@ -1,18 +1,18 @@
 package isep.projet.astar.Controler;
 
+import isep.projet.astar.Data.AbstractMap;
 import isep.projet.astar.Data.Map1;
+import isep.projet.astar.Data.Map2;
 import isep.projet.astar.IHM.AbstractFloor;
-import isep.projet.astar.IHM.ForestFloor;
 import isep.projet.astar.IHM.GridPanel;
 import isep.projet.astar.IHM.MainFrame;
 import isep.projet.astar.IHM.RockFloor;
-import isep.projet.astar.IHM.SandFloor;
 import isep.projet.astar.IHM.Wall;
-import isep.projet.astar.IHM.WaterFloor;
 
 import java.awt.Color;
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -56,6 +56,13 @@ public class GridControler {
 		return squares.get(p);
 	}
 
+	public void drawPath(LinkedList<AbstractFloor> path , Color color ){
+		for(AbstractFloor square : path){
+			square.setBackground(color);
+			square.repaint();
+		}
+	}
+	
 	public void start() {
 		mainFrame.setMap(map);
 		mainFrame.setVisible(true);
@@ -64,7 +71,10 @@ public class GridControler {
 	public void chooseMap(int mapNum) {
 		switch (mapNum) {
 		case 0:
-			map = loadMap1();
+			map = loadMap(new Map1());
+			break;
+		case 1:
+			map = loadMap(new Map2());
 			break;
 		default:
 			log.error("Unkown Map Number");
@@ -75,32 +85,30 @@ public class GridControler {
 		endPoint.setBackground(Color.PINK);
 	}
 
-	private GridPanel loadMap1() {
-		GridPanel panel = new GridPanel(Map1.WIDTH, Map1.HEIGHT);
+	private GridPanel loadMap(AbstractMap Map) {
+		GridPanel panel = new GridPanel(Map.getWidth(), Map.getHeight());
 		AbstractFloor pan;
-		for (int x = 0; x < Map1.WIDTH; x++) {
-			for (int y = 0; y < Map1.WIDTH; y++) {
-				Point p = new Point(x, y);
 
-				switch (Map1.map[x][y]) {
-				case Map1.CODE_END:
+		for (int y = 0; y < Map.getHeight(); y++) {
+			for (int x = 0; x < Map.getWidth(); x++) {
+				Point p = new Point(x, y);
+				int value = (Map.getMap())[y][x];
+				
+				if (value == Map.getCodeEnd()) {
 					pan = new RockFloor();
 					endPoint = pan;
-					break;
-				case Map1.CODE_START:
+				} else if (value == Map.getCodeStart()) {
 					pan = new RockFloor();
 					startPoint = pan;
-					break;
-				case Map1.CODE_ROCK:
+				} else if (value == Map.getCodeRock()) {
 					pan = new RockFloor();
-					break;
-				case Map1.CODE_WALL:
+				} else if (value == Map.getCodeWall()) {
 					pan = new Wall();
-					break;
-				default:
+				} else {
 					log.error("Unknown map Code");
 					return null;
 				}
+
 				pan.setCoordinates(p);
 				panel.add(pan);
 				squares.put(p, pan);
@@ -108,22 +116,4 @@ public class GridControler {
 		}
 		return panel;
 	}
-
-	// On pourra remplacer ca par lecture dans un fichier ou dans un tableau ou
-	// jsais pas
-	/*
-	 * private GridPanel loadMap2() { GridPanel panel = new
-	 * GridPanel(Map1.WIDTH, Map1.HEIGHT);
-	 * 
-	 * int x = 0, y = 0; AbstractFloor pan; for (int i = 0; i < (Map1.WIDTH *
-	 * Map1.HEIGHT); i++) { Point p = new Point(x, y);
-	 * 
-	 * if ((y == 1 && x == 0) || (y == 2 && x == 0)) { pan = new WaterFloor(); }
-	 * else if (x == 1 && y == 2) { pan = new ForestFloor(); } else if (y == 0)
-	 * { pan = new Wall(); } else if (y == 6) { pan = new SandFloor(); } else {
-	 * pan = new RockFloor(); } pan.setCoordinates(p); panel.add(pan);
-	 * squares.put(p, pan); if (x == 29) { x = 0; y++; } else { x++; } }
-	 * startPoint = squares.get(new Point(1,1)); endPoint = squares.get(new
-	 * Point(20,20)); return panel; }
-	 */
 }

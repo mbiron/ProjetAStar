@@ -1,14 +1,14 @@
 package isep.projet.astar.Data;
 
-public class Map1 {
+public class Map1 extends AbstractMap {
 
-	public static final int HEIGHT = 30;
-	public static final int WIDTH = 30;
+	public final int HEIGHT = 30;
+	public final int WIDTH = 30;
 
-	public static final int CODE_START = 2;
-	public static final int CODE_END = 3;
-	public static final int CODE_WALL = 50;
-	public static final int CODE_ROCK = 49;
+	public final int CODE_START = 91;
+	public final int CODE_END = 115;
+	public final int CODE_WALL = 50;
+	public final int CODE_ROCK = 49;
 
 	// Générée grace a Tiled : http://www.mapeditor.org/
 	//
@@ -16,8 +16,8 @@ public class Map1 {
 	//
 	// REGEX pour mise en forme : ,\n --> },\n
 	// ^. --> {
-	public static final int[][] map = {
-			{ 2, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
+	public final int[][] map = {
+			{ 91, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
 					50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50 },
 			{ 49, 49, 50, 49, 49, 49, 50, 50, 49, 49, 49, 49, 49, 49, 49, 50,
 					49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 50, 49 },
@@ -46,7 +46,7 @@ public class Map1 {
 			{ 49, 50, 50, 50, 50, 50, 49, 49, 49, 49, 50, 49, 50, 49, 50, 49,
 					49, 49, 50, 50, 50, 50, 49, 49, 49, 50, 49, 50, 49, 50 },
 			{ 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 49, 50, 49, 49, 49,
-					50, 50, 50, 50, 50, 50, 49, 3, 49, 50, 49, 50, 49, 50 },
+					50, 50, 50, 50, 50, 50, 49, 115, 49, 50, 49, 50, 49, 50 },
 			{ 49, 50, 50, 50, 50, 50, 49, 49, 49, 49, 49, 49, 50, 50, 50, 50,
 					50, 50, 50, 50, 50, 50, 49, 50, 49, 50, 49, 50, 49, 50 },
 			{ 49, 50, 50, 50, 50, 50, 49, 50, 50, 50, 50, 50, 49, 49, 49, 50,
@@ -77,5 +77,33 @@ public class Map1 {
 					50, 50, 50, 50, 50, 50, 50, 50, 49, 50, 49, 50, 50, 49 },
 			{ 49, 49, 49, 49, 49, 49, 49, 49, 49, 50, 49, 49, 49, 49, 49, 49,
 					49, 49, 49, 49, 49, 49, 49, 49, 49, 50, 49, 49, 49, 49 } };
+
+	public int getHeight() {
+		return HEIGHT;
+	}
+
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	public int getCodeStart() {
+		return CODE_START;
+	}
+
+	public int getCodeEnd() {
+		return CODE_END;
+	}
+
+	public int getCodeWall() {
+		return CODE_WALL;
+	}
+
+	public int getCodeRock() {
+		return CODE_ROCK;
+	}
+
+	public int[][] getMap() {
+		return map;
+	}
 
 }

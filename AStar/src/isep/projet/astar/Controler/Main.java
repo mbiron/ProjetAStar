@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		GridControler controler = GridControler.getInstance();
-		controler.chooseMap(1); // Avec ca on pourra faire une ptite ihm pour choisir la map et pourquoi pas l'algo
+		controler.chooseMap(0); 
 		controler.start();
 		
 		LinkedList<AbstractFloor> path = BFS.algo(controler.getStartPoint(),controler.getEndPoint());

@@ -24,9 +24,9 @@ public class GridPanel extends JPanel {
 	private static final Logger log = Logger.getLogger(GridPanel.class);
 
 	public GridPanel(int width, int height) {
-		this.setPreferredSize(new java.awt.Dimension(width * Constants.SQUARE_SIDE,height * Constants.SQUARE_SIDE));
-		this.setRequestFocusEnabled(false);
-		this.setLayout(new GridLayout(height, width));
+		setMaximumSize(new java.awt.Dimension(width * Constants.SQUARE_SIDE,height * Constants.SQUARE_SIDE));
+		setRequestFocusEnabled(false);
+		setLayout(new GridLayout(height, width));
 
 		Border whiteline = BorderFactory.createLineBorder(Color.white, 1);
 		this.setBorder(whiteline);

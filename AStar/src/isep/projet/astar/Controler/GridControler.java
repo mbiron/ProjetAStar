@@ -40,10 +40,6 @@ public class GridControler {
 		return instance;
 	}
 
-	public Map<Point, AbstractFloor> getCases() {
-		return squares;
-	}
-
 	public AbstractFloor getStartPoint() {
 		return startPoint;
 	}

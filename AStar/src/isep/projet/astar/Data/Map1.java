@@ -2,13 +2,13 @@ package isep.projet.astar.Data;
 
 public class Map1 extends AbstractMap {
 
-	public final int HEIGHT = 30;
-	public final int WIDTH = 30;
+	private final int HEIGHT = 30;
+	private final int WIDTH = 30;
 
-	public final int CODE_START = 91;
-	public final int CODE_END = 115;
-	public final int CODE_WALL = 50;
-	public final int CODE_ROCK = 49;
+	private final int CODE_START = 91;
+	private final int CODE_END = 115;
+	private final int CODE_WALL = 50;
+	private final int CODE_ROCK = 49;
 
 	// Générée grace a Tiled : http://www.mapeditor.org/
 	//
@@ -16,7 +16,7 @@ public class Map1 extends AbstractMap {
 	//
 	// REGEX pour mise en forme : ,\n --> },\n
 	// ^. --> {
-	public final int[][] map = {
+	private final int[][] map = {
 			{ 91, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,
 					50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50 },
 			{ 49, 49, 50, 49, 49, 49, 50, 50, 49, 49, 49, 49, 49, 49, 49, 50,

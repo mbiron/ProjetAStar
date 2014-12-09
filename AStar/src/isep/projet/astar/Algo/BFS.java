@@ -1,5 +1,6 @@
 package isep.projet.astar.Algo;
 
+import isep.projet.astar.Data.Constants.ALGOS_ID;
 import isep.projet.astar.IHM.AbstractFloor;
 
 import java.util.HashMap;
@@ -14,11 +15,22 @@ import org.apache.log4j.Logger;
  * @author maxime
  *
  */
-public class BFS {
+public class BFS extends AbstractAlgo {
 
 	private static final Logger log = Logger.getLogger(BFS.class);
 
-	public static LinkedList<AbstractFloor> algo(AbstractFloor StartPoint,
+	@Override
+	public String getLabel() {
+		return "Breadth First Search";
+	}
+
+	@Override
+	public ALGOS_ID getId() {
+		return ALGOS_ID.BFS;
+	}
+
+	@Override
+	public LinkedList<AbstractFloor> run(AbstractFloor StartPoint,
 			AbstractFloor EndPoint) {
 		LinkedList<AbstractFloor> squares = new LinkedList<>();
 		squares.add(StartPoint);

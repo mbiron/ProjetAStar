@@ -1,5 +1,7 @@
 package isep.projet.astar.Data;
 
+import isep.projet.astar.Data.Constants.MAPS_ID;
+
 public class Map1 extends AbstractMap {
 
 	private final int HEIGHT = 30;
@@ -104,6 +106,16 @@ public class Map1 extends AbstractMap {
 
 	public int[][] getMap() {
 		return map;
+	}
+
+	@Override
+	public String getLabel() {
+		return "Maze";
+	}
+
+	@Override
+	public MAPS_ID getId() {
+		return MAPS_ID.Maze;
 	}
 
 }

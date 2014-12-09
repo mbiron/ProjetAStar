@@ -1,15 +1,14 @@
 package isep.projet.astar.IHM;
 
+import isep.projet.astar.Algo.AbstractAlgo;
 import isep.projet.astar.Controler.GridControler;
+import isep.projet.astar.Data.AbstractMap;
 import isep.projet.astar.Data.Constants;
 
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -30,11 +29,18 @@ public class ControlPanel extends JPanel {
 	public ControlPanel() {
 		textMap = new JLabel("Choose Map");
 		textAlgo = new JLabel("Choose Algo");
-		maps = new JComboBox<>(getMapList());
-		algos = new JComboBox<>(getAlgoList());
+		maps = new JComboBox<>();
+		algos = new JComboBox<>();
 
+		for (AbstractMap map : GridControler.getInstance().getMapsCollection()) {
+			maps.addItem(new ComboBoxItem(map.getId().ordinal(), map.getLabel()));
+		}
+		
+		for (AbstractAlgo algo : GridControler.getInstance().getAlgosCollection()) {
+			algos.addItem(new ComboBoxItem(algo.getId().ordinal(), algo.getLabel()));
+		}
+		
 		maps.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ComboBoxItem mapItem = (ComboBoxItem) maps.getSelectedItem();
@@ -79,21 +85,4 @@ public class ControlPanel extends JPanel {
 			return name;
 		}
 	}
-
-	private Vector<ComboBoxItem> getMapList() {
-		Vector<ComboBoxItem> mapsItems = new Vector<>();
-		for (int i = 0; i < Constants.MAP_NAMES.length; i++) {
-			mapsItems.add(new ComboBoxItem(i, Constants.MAP_NAMES[i]));
-		}
-		return mapsItems;
-	}
-
-	private Vector<ComboBoxItem> getAlgoList() {
-		Vector<ComboBoxItem> algosItems = new Vector<>();
-		for (int i = 0; i < Constants.ALGO_NAMES.length; i++) {
-			algosItems.add(new ComboBoxItem(i, Constants.ALGO_NAMES[i]));
-		}
-		return algosItems;
-	}
-
 }

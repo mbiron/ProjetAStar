@@ -1,5 +1,7 @@
 package isep.projet.astar.Data;
 
+import isep.projet.astar.Data.Constants.MAPS_ID;
+
 public abstract class AbstractMap {
 
 	public abstract int getHeight();
@@ -15,5 +17,9 @@ public abstract class AbstractMap {
 	public abstract int getCodeRock();
 
 	public abstract int[][] getMap();
+
+	public abstract String getLabel();
+
+	public abstract MAPS_ID getId();
 
 }

@@ -1,6 +1,5 @@
 package isep.projet.astar.Data;
 
-import isep.projet.astar.Data.Constants.MAPS_ID;
 
 public abstract class AbstractMap {
 
@@ -20,6 +19,6 @@ public abstract class AbstractMap {
 
 	public abstract String getLabel();
 
-	public abstract MAPS_ID getId();
+	public abstract int getId();
 
 }

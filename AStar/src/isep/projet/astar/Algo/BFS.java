@@ -25,8 +25,8 @@ public class BFS extends AbstractAlgo {
 	}
 
 	@Override
-	public ALGOS_ID getId() {
-		return ALGOS_ID.BFS;
+	public int getId() {
+		return ALGOS_ID.BFS.ordinal();
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import isep.projet.astar.Data.Constants.MAPS_ID;
 public class Map2 extends AbstractMap {
 
 	private final int HEIGHT = 20;
-	private  final int WIDTH = 30;
+	private final int WIDTH = 30;
 
 	private final int CODE_START = 91;
 	private final int CODE_END = 115;
@@ -94,8 +94,8 @@ public class Map2 extends AbstractMap {
 	}
 
 	@Override
-	public MAPS_ID getId() {
-		return MAPS_ID.EmptyMap;
+	public int getId() {
+		return MAPS_ID.EmptyMap.ordinal();
 	}
 
 }

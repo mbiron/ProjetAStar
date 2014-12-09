@@ -33,20 +33,18 @@ public class ControlPanel extends JPanel {
 		algos = new JComboBox<>();
 
 		for (AbstractMap map : GridControler.getInstance().getMapsCollection()) {
-			maps.addItem(new ComboBoxItem(map.getId().ordinal(), map.getLabel()));
+			maps.addItem(new ComboBoxItem(map.getId(), map.getLabel()));
 		}
 		
 		for (AbstractAlgo algo : GridControler.getInstance().getAlgosCollection()) {
-			algos.addItem(new ComboBoxItem(algo.getId().ordinal(), algo.getLabel()));
+			algos.addItem(new ComboBoxItem(algo.getId(), algo.getLabel()));
 		}
 		
 		maps.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ComboBoxItem mapItem = (ComboBoxItem) maps.getSelectedItem();
-				log.info("listener");
-				GridControler.getInstance().chooseMap(mapItem.Id);
-				GridControler.getInstance().start();
+				GridControler.getInstance().start(mapItem.Id);
 			}
 		});
 

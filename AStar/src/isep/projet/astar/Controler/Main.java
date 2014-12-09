@@ -13,8 +13,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		GridControler controler = GridControler.getInstance();
-		controler.chooseMap(MAPS_ID.EmptyMap.ordinal()); 
-		controler.start();
+		controler.initIHM();
+		controler.start(MAPS_ID.EmptyMap.ordinal());
 		
 		AbstractAlgo algo = new BFS();
 		LinkedList<AbstractFloor> path = algo.run(controler.getStartPoint(),controler.getEndPoint());

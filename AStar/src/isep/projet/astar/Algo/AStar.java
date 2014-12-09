@@ -17,8 +17,8 @@ public class AStar extends AbstractAlgo {
 	}
 
 	@Override
-	public ALGOS_ID getId() {
-		return ALGOS_ID.ASTAR;
+	public int getId() {
+		return ALGOS_ID.ASTAR.ordinal();
 	}
 
 	@Override

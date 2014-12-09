@@ -114,8 +114,8 @@ public class Map1 extends AbstractMap {
 	}
 
 	@Override
-	public MAPS_ID getId() {
-		return MAPS_ID.Maze;
+	public int getId() {
+		return MAPS_ID.Maze.ordinal();
 	}
 
 }

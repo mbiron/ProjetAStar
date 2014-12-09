@@ -9,7 +9,7 @@ public abstract class AbstractAlgo {
 
 	public abstract String getLabel();
 
-	public abstract ALGOS_ID getId();
+	public abstract int getId();
 
 	public abstract LinkedList<AbstractFloor> run(AbstractFloor StartPoint,
 			AbstractFloor EndPoint);

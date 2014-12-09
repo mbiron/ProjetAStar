@@ -1,9 +1,8 @@
 package isep.projet.astar.Algo;
 
-import java.util.LinkedList;
-
-import isep.projet.astar.Data.Constants.ALGOS_ID;
 import isep.projet.astar.IHM.AbstractFloor;
+
+import java.util.LinkedList;
 
 public abstract class AbstractAlgo {
 
@@ -14,4 +13,7 @@ public abstract class AbstractAlgo {
 	public abstract LinkedList<AbstractFloor> run(AbstractFloor StartPoint,
 			AbstractFloor EndPoint);
 
+	public String toString() {
+		return getLabel();
+	}
 }

@@ -39,17 +39,9 @@ public class GridControler {
 		squares = new HashMap<>();
 	}
 
-	private void initMapsList() {
-		mapsList = new ArrayList<>();
-		mapsList.add(new Map1());
-		mapsList.add(new Map2());
-	}
-
-	private void initAlgosList() {
-		algosList = new ArrayList<>();
-		algosList.add(new BFS());
-		algosList.add(new AStar());
-	}
+	// ********************************************//
+	// ***************** Getters ******************//
+	// ********************************************//
 
 	public static GridControler getInstance() {
 		if (instance == null) {
@@ -78,6 +70,9 @@ public class GridControler {
 		return algosList;
 	}
 
+	// ********************************************//
+	// ***************** Controls *****************//
+	// ********************************************//
 	public void drawPath(LinkedList<AbstractFloor> path, Color color) {
 		for (AbstractFloor square : path) {
 			square.setBackground(color);
@@ -92,23 +87,28 @@ public class GridControler {
 		}
 	}
 
-	public void start(int mapId) {
-		for (AbstractMap mapItem : mapsList) {
-			if (mapId == mapItem.getId()) {
-				GridPanel map = loadMap(mapItem);
+	public void start() {
+		mainFrame.setVisible(false);
 
-				// Identify start & end point on the map
-				startPoint.setBackground(Color.RED);
-				endPoint.setBackground(Color.PINK);
+		// Map Regeneration
+		AbstractMap mapItem = mainFrame.getControlPanel().getSelectedMap();
+		GridPanel map = loadMap(mapItem);
 
-				mainFrame.setMap(map);
-				mainFrame.setVisible(true);
-				return;
-			}
-		}
-		log.error("Unkown map Id");
+		// Identify start & end point on the map
+		startPoint.setBackground(Color.RED);
+		endPoint.setBackground(Color.PINK);
+
+		mainFrame.setMap(map);
+
+		// Algo Regeneration
+		AbstractAlgo algoItem = mainFrame.getControlPanel().getSelectedAlgo();
+
+		mainFrame.setVisible(true);
 	}
 
+	// ********************************************//
+	// ***************** Private ******************//
+	// ********************************************//
 	private GridPanel loadMap(AbstractMap Map) {
 		GridPanel panel = new GridPanel(Map.getWidth(), Map.getHeight());
 		AbstractFloor pan;
@@ -140,4 +140,17 @@ public class GridControler {
 		}
 		return panel;
 	}
+
+	private void initMapsList() {
+		mapsList = new ArrayList<>();
+		mapsList.add(new Map2());
+		mapsList.add(new Map1());
+	}
+
+	private void initAlgosList() {
+		algosList = new ArrayList<>();
+		algosList.add(new BFS());
+		algosList.add(new AStar());
+	}
+
 }

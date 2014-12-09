@@ -20,11 +20,12 @@ import org.apache.log4j.Logger;
 
 public class ControlPanel extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(ControlPanel.class);
 	JLabel textMap;
 	JLabel textAlgo;
-	JComboBox<ComboBoxItem> maps;
-	JComboBox<ComboBoxItem> algos;
+	JComboBox<AbstractMap> maps;
+	JComboBox<AbstractAlgo> algos;
 
 	public ControlPanel() {
 		textMap = new JLabel("Choose Map");
@@ -33,22 +34,31 @@ public class ControlPanel extends JPanel {
 		algos = new JComboBox<>();
 
 		for (AbstractMap map : GridControler.getInstance().getMapsCollection()) {
-			maps.addItem(new ComboBoxItem(map.getId(), map.getLabel()));
+			maps.addItem(map);
 		}
-		
-		for (AbstractAlgo algo : GridControler.getInstance().getAlgosCollection()) {
-			algos.addItem(new ComboBoxItem(algo.getId(), algo.getLabel()));
+		for (AbstractAlgo algo : GridControler.getInstance()
+				.getAlgosCollection()) {
+			algos.addItem(algo);
 		}
-		
+
 		maps.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ComboBoxItem mapItem = (ComboBoxItem) maps.getSelectedItem();
-				GridControler.getInstance().start(mapItem.Id);
+				// Ask for restart
+				GridControler.getInstance().start();
 			}
 		});
 
-		setMaximumSize(new java.awt.Dimension(200, Constants.MAIN_FRAME_HEIGHT));
+		algos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Ask for restart
+				GridControler.getInstance().start();
+			}
+		});
+
+		setMinimumSize(new java.awt.Dimension(Constants.CONTROL_PANEL_WIDTH,
+				Constants.MAIN_FRAME_HEIGHT));
 		setRequestFocusEnabled(false);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -57,30 +67,26 @@ public class ControlPanel extends JPanel {
 		maps.setAlignmentX(Component.CENTER_ALIGNMENT);
 		algos.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		maps.setMaximumSize(new Dimension(200, 20));
-		algos.setMaximumSize(new Dimension(200, 20));
+		maps.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 20));
+		algos.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 20));
 
-		add(Box.createRigidArea(new Dimension(200, 100)));
+		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
+				100)));
 		add(textMap);
 		add(maps);
-		add(Box.createRigidArea(new Dimension(200, 100)));
+		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
+				100)));
 		add(textAlgo);
 		add(algos);
 
 		this.setVisible(true);
 	}
 
-	private class ComboBoxItem {
-		public int Id;
-		public String name;
+	public AbstractMap getSelectedMap() {
+		return (AbstractMap) maps.getSelectedItem();
+	}
 
-		public ComboBoxItem(int id, String name) {
-			this.Id = id;
-			this.name = name;
-		}
-
-		public String toString() {
-			return name;
-		}
+	public AbstractAlgo getSelectedAlgo() {
+		return (AbstractAlgo) algos.getSelectedItem();
 	}
 }

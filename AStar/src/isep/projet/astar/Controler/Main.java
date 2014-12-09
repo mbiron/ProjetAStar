@@ -14,7 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		GridControler controler = GridControler.getInstance();
 		controler.initIHM();
-		controler.start(MAPS_ID.EmptyMap.ordinal());
+		controler.start();
 		
 		AbstractAlgo algo = new BFS();
 		LinkedList<AbstractFloor> path = algo.run(controler.getStartPoint(),controler.getEndPoint());

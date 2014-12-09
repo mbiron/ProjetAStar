@@ -20,5 +20,9 @@ public abstract class AbstractMap {
 	public abstract String getLabel();
 
 	public abstract int getId();
+	
+	public String toString() {
+		return getLabel();
+	}
 
 }

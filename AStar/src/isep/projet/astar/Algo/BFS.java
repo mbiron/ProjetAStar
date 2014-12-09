@@ -30,14 +30,15 @@ public class BFS extends AbstractAlgo {
 	}
 
 	@Override
-	public LinkedList<AbstractFloor> run(AbstractFloor StartPoint,
+	public LinkedList<AbstractFloor> compute(AbstractFloor StartPoint,
 			AbstractFloor EndPoint) {
 		LinkedList<AbstractFloor> squares = new LinkedList<>();
 		squares.add(StartPoint);
 		AbstractFloor current = StartPoint;
 		Map<AbstractFloor, AbstractFloor> previous = new HashMap<>();
 
-		while (current != EndPoint && !squares.isEmpty()) {
+		log.info("start");
+		while (current != EndPoint && !squares.isEmpty() && !stop) {
 			current = squares.getFirst();
 			squares.remove(current);
 
@@ -62,13 +63,22 @@ public class BFS extends AbstractAlgo {
 			}
 		}
 
-		current = EndPoint;
+		log.info("end algo");
+		if(stop) return null;
+		log.info("compute path");
 		LinkedList<AbstractFloor> path = new LinkedList<>();
+		
+		/*
+		 * ATTENTION : NE PAS DECOMMENTER CA SINON CA FAIT TOUT PETER!!!!!
+		 * 
+		current = EndPoint;
 		path.add(current);
 		while (current != StartPoint) {
 			current = previous.get(current);
 			path.addFirst(current);
 		}
+		log.info("return");
+		*/
 		return path;
 	}
 }

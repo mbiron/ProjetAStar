@@ -32,6 +32,7 @@ public class GridControler {
 	private AbstractFloor endPoint;
 	private List<AbstractMap> mapsList;
 	private List<AbstractAlgo> algosList;
+	private AbstractAlgo runningAlgo;
 
 	private GridControler() {
 		initMapsList();
@@ -43,22 +44,22 @@ public class GridControler {
 	// ***************** Getters ******************//
 	// ********************************************//
 
-	public static GridControler getInstance() {
+	public static synchronized GridControler getInstance() {
 		if (instance == null) {
 			instance = new GridControler();
 		}
 		return instance;
 	}
 
-	public AbstractFloor getStartPoint() {
+	public synchronized AbstractFloor getStartPoint() {
 		return startPoint;
 	}
 
-	public AbstractFloor getEndPoint() {
+	public synchronized AbstractFloor getEndPoint() {
 		return endPoint;
 	}
 
-	public AbstractFloor getSquareAt(Point p) {
+	public synchronized AbstractFloor getSquareAt(Point p) {
 		return squares.get(p);
 	}
 
@@ -85,9 +86,23 @@ public class GridControler {
 			mainFrame = new MainFrame();
 			mainFrame.setVisible(false);
 		}
+		// Get first algo to run
+		runningAlgo = mainFrame.getControlPanel().getSelectedAlgo();
 	}
 
 	public void start() {
+		log.info("start");
+		runningAlgo.stopRunning();
+		try {
+			// Wait for thread end
+			log.info("Wait for thread end");
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log.info("done!");
+		
 		mainFrame.setVisible(false);
 
 		// Map Regeneration
@@ -101,9 +116,11 @@ public class GridControler {
 		mainFrame.setMap(map);
 
 		// Algo Regeneration
-		AbstractAlgo algoItem = mainFrame.getControlPanel().getSelectedAlgo();
-
+		runningAlgo = mainFrame.getControlPanel().getSelectedAlgo();
+		
 		mainFrame.setVisible(true);
+		(new Thread(runningAlgo)).start();
+		log.info("run thread");
 	}
 
 	// ********************************************//

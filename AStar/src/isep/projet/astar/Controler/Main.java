@@ -16,9 +16,9 @@ public class Main {
 		controler.initIHM();
 		controler.start();
 		
-		AbstractAlgo algo = new BFS();
-		LinkedList<AbstractFloor> path = algo.run(controler.getStartPoint(),controler.getEndPoint());
-		controler.drawPath(path, Color.CYAN);
+		//AbstractAlgo algo = new BFS();
+		//LinkedList<AbstractFloor> path = algo.compute(controler.getStartPoint(),controler.getEndPoint());
+		//controler.drawPath(path, Color.CYAN);
 	}
 
 }

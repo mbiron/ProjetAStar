@@ -36,12 +36,7 @@ public abstract class AbstractFloor extends JPanel {
 
 		setVisible(true);
 	}
-/*	
-	public void isCurrent(){
-		setBorder(BorderFactory.createLineBorder(Color.RED, 5));
-		repaint();
-	}
-*/
+
 	public void setVisited() {
 		visited = true;
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));

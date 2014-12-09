@@ -22,7 +22,7 @@ public class AStar extends AbstractAlgo {
 	}
 
 	@Override
-	public LinkedList<AbstractFloor> run(AbstractFloor StartPoint,
+	public LinkedList<AbstractFloor> compute(AbstractFloor StartPoint,
 			AbstractFloor EndPoint) {
 		// TODO Auto-generated method stub
 		return null;

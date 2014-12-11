@@ -33,11 +33,20 @@ public class GridControler {
 	private List<AbstractMap> mapsList;
 	private List<AbstractAlgo> algosList;
 	private AbstractAlgo runningAlgo;
+	private Thread algoThread = null;
+	private int stepCounter;
+
+	private enum TIMER {
+		E_0MS, E_50MS, E_100MS, E_500MS
+	};
+
+	private TIMER timerValue;
 
 	private GridControler() {
 		initMapsList();
 		initAlgosList();
 		squares = new HashMap<>();
+		timerValue = TIMER.E_50MS;
 	}
 
 	// ********************************************//
@@ -71,6 +80,25 @@ public class GridControler {
 		return algosList;
 	}
 
+	public synchronized void nextStep() {
+		stepCounter++;
+		mainFrame.getControlPanel().updateCounter(stepCounter);
+	}
+
+	public synchronized int getTimerValue() {
+		switch (timerValue) {
+		case E_0MS:
+			return 0;
+		case E_100MS:
+			return 100;
+		case E_500MS:
+			return 500;
+		case E_50MS:
+		default:
+			return 50;
+		}
+	}
+
 	// ********************************************//
 	// ***************** Controls *****************//
 	// ********************************************//
@@ -94,16 +122,19 @@ public class GridControler {
 		log.info("start");
 		runningAlgo.stopRunning();
 		try {
-			// Wait for thread end
 			log.info("Wait for thread end");
-			Thread.sleep(1000);
+			// Thread.sleep(1000);
+			if (algoThread != null)
+				algoThread.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		log.info("done!");
-		
+
 		mainFrame.setVisible(false);
+
+		// Reinit IHM Counter
+		stepCounter = 0;
+		mainFrame.getControlPanel().updateCounter(stepCounter);
 
 		// Map Regeneration
 		AbstractMap mapItem = mainFrame.getControlPanel().getSelectedMap();
@@ -117,9 +148,10 @@ public class GridControler {
 
 		// Algo Regeneration
 		runningAlgo = mainFrame.getControlPanel().getSelectedAlgo();
-		
+
 		mainFrame.setVisible(true);
-		(new Thread(runningAlgo)).start();
+		algoThread = new Thread(runningAlgo);
+		algoThread.start();
 		log.info("run thread");
 	}
 

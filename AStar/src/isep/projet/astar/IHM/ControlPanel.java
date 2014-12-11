@@ -22,14 +22,16 @@ public class ControlPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(ControlPanel.class);
-	JLabel textMap;
-	JLabel textAlgo;
-	JComboBox<AbstractMap> maps;
-	JComboBox<AbstractAlgo> algos;
+	private JLabel textMap;
+	private JLabel textAlgo;
+	private JLabel counter;
+	private JComboBox<AbstractMap> maps;
+	private JComboBox<AbstractAlgo> algos;
 
 	public ControlPanel() {
 		textMap = new JLabel("Choose Map");
 		textAlgo = new JLabel("Choose Algo");
+		counter = new JLabel("Counter = " + 0);
 		maps = new JComboBox<>();
 		algos = new JComboBox<>();
 
@@ -66,20 +68,26 @@ public class ControlPanel extends JPanel {
 		textAlgo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		maps.setAlignmentX(Component.CENTER_ALIGNMENT);
 		algos.setAlignmentX(Component.CENTER_ALIGNMENT);
+		counter.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		maps.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 20));
 		algos.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 20));
 
 		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
-				100)));
+				75)));
 		add(textMap);
 		add(maps);
 		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
-				100)));
+				50)));
 		add(textAlgo);
 		add(algos);
+		add(counter);
 
-		this.setVisible(true);
+		setVisible(true);
+	}
+
+	public synchronized void updateCounter(int counterValue) {
+		counter.setText("Counter = " + counterValue);
 	}
 
 	public AbstractMap getSelectedMap() {

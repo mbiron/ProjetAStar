@@ -1,5 +1,6 @@
 package isep.projet.astar.Algo;
 
+import isep.projet.astar.Controler.GridControler;
 import isep.projet.astar.Data.Constants.ALGOS_ID;
 import isep.projet.astar.IHM.AbstractFloor;
 
@@ -37,7 +38,7 @@ public class BFS extends AbstractAlgo {
 		AbstractFloor current = StartPoint;
 		Map<AbstractFloor, AbstractFloor> previous = new HashMap<>();
 
-		log.info("start");
+		log.info("start " + this);
 		while (current != EndPoint && !squares.isEmpty() && !stop) {
 			current = squares.getFirst();
 			squares.remove(current);
@@ -54,31 +55,31 @@ public class BFS extends AbstractAlgo {
 					previous.put(neighboor, current);
 				}
 			}
-			// For testing
+			
+			// Increase IHM step counter
+			GridControler.getInstance().nextStep();
 			try {
-				Thread.sleep(50);
+				Thread.sleep(GridControler.getInstance().getTimerValue());
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
-		log.info("end algo");
+		log.info("end " + this);
 		if(stop) return null;
 		log.info("compute path");
 		LinkedList<AbstractFloor> path = new LinkedList<>();
 		
-		/*
-		 * ATTENTION : NE PAS DECOMMENTER CA SINON CA FAIT TOUT PETER!!!!!
-		 * 
 		current = EndPoint;
 		path.add(current);
+		
 		while (current != StartPoint) {
 			current = previous.get(current);
 			path.addFirst(current);
 		}
 		log.info("return");
-		*/
+		
 		return path;
 	}
 }

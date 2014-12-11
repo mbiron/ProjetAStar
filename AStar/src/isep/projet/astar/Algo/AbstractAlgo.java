@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
+// TODO extends thread
 public abstract class AbstractAlgo implements Runnable {
 
 	private static final Logger log = Logger.getLogger(AbstractAlgo.class);
@@ -30,14 +31,14 @@ public abstract class AbstractAlgo implements Runnable {
 
 	public void run() {
 		stop = false;
-		log.info("thread!");
 		GridControler.getInstance().getStartPoint();
-		log.info("instance");
-		log.info(stop);
+
 		LinkedList<AbstractFloor> path = compute(GridControler.getInstance().getStartPoint(),
 				GridControler.getInstance().getEndPoint());
-		log.info("path computed");
-		//if (!stop)
-		//	GridControler.getInstance().drawPath(path, Color.CYAN);
+		log.info("path computed!");
+		
+		if (!stop && path != null){
+			GridControler.getInstance().drawPath(path, Color.CYAN);
+		}
 	}
 }

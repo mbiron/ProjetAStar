@@ -2,9 +2,13 @@ package isep.projet.astar.IHM;
 
 import isep.projet.astar.Controler.GridControler;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,7 @@ public abstract class AbstractFloor extends JPanel {
 	private List<AbstractFloor> neighboors;
 	private boolean visited;
 	private Point coordinates;
+	protected BufferedImage image;
 
 	public AbstractFloor() {
 		visited = false;
@@ -39,8 +44,22 @@ public abstract class AbstractFloor extends JPanel {
 
 	public void setVisited() {
 		visited = true;
-		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		// setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		repaint();
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Graphics2D g2 = (Graphics2D) g;
+		if (visited) {
+			g2.setColor(Color.black);
+			g2.setStroke(new BasicStroke(10));
+			g2.drawLine(0, 0, getWidth(), 0);
+			g2.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
+			g2.drawLine(0, 0, 0, getHeight() - 1);
+			g2.drawLine(getWidth(), 0, getWidth() - 1, getHeight() - 1);
+		}
 	}
 
 	public boolean isVisited() {
@@ -79,9 +98,9 @@ public abstract class AbstractFloor extends JPanel {
 	public int getMovCost() {
 		return movCost;
 	}
-	
+
 	// for debug
-	public String toString(){
+	public String toString() {
 		return coordinates.toString();
 	}
 }

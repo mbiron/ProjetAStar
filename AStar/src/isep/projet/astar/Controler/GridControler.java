@@ -104,7 +104,7 @@ public class GridControler {
 	// ********************************************//
 	public void drawPath(LinkedList<AbstractFloor> path, Color color) {
 		for (AbstractFloor square : path) {
-			square.setBackground(color);
+			square.setColor(color);
 			square.repaint();
 		}
 	}
@@ -141,8 +141,9 @@ public class GridControler {
 		GridPanel map = loadMap(mapItem);
 
 		// Identify start & end point on the map
-		startPoint.setBackground(Color.RED);
-		endPoint.setBackground(Color.PINK);
+		
+		startPoint.setColor(Color.RED);
+		endPoint.setColor(Color.PINK);
 
 		mainFrame.setMap(map);
 

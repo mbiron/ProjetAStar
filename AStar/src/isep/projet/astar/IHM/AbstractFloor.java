@@ -36,8 +36,9 @@ public abstract class AbstractFloor extends JPanel {
 		neighboors = new ArrayList<>();
 
 		setPreferredSize(new Dimension(20, 20));
-		Border whiteline = BorderFactory.createLineBorder(Color.white, 1);
-		this.setBorder(whiteline);
+		setBackground(Color.BLACK);
+		//Border whiteline = BorderFactory.createLineBorder(Color.BLACK, 5);
+		//this.setBorder(whiteline);
 
 		setVisible(true);
 	}
@@ -48,17 +49,29 @@ public abstract class AbstractFloor extends JPanel {
 		repaint();
 	}
 
+	public void setColor(Color c){
+		image = null;
+		setBackground(c);
+		repaint();
+	}
+	
+	protected void displayImage(Graphics g){
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(image, 1, 1, getWidth() - 2, getHeight() - 2, null);
+		g2.dispose();
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		Graphics2D g2 = (Graphics2D) g;
 		if (visited) {
-			g2.setColor(Color.black);
-			g2.setStroke(new BasicStroke(10));
+			g2.setColor(Color.LIGHT_GRAY);
+			g2.setStroke(new BasicStroke(2));
 			g2.drawLine(0, 0, getWidth(), 0);
-			g2.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
+			g2.drawLine(0, getHeight() - 1, getWidth(), getHeight());
 			g2.drawLine(0, 0, 0, getHeight() - 1);
-			g2.drawLine(getWidth(), 0, getWidth() - 1, getHeight() - 1);
+			g2.drawLine(getWidth(), 0, getWidth(), getHeight() - 1);
 		}
 	}
 

@@ -38,7 +38,7 @@ public abstract class AbstractAlgo implements Runnable {
 		log.info("path computed!");
 		
 		if (!stop && path != null){
-			GridControler.getInstance().drawPath(path, Color.CYAN);
+			GridControler.getInstance().drawPath(path, Color.GREEN);
 		}
 	}
 }

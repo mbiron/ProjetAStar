@@ -1,7 +1,6 @@
 package isep.projet.astar.IHM;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.io.File;
 import java.io.IOException;
 
@@ -24,9 +23,7 @@ public class RockFloor extends AbstractFloor {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (image != null) {
-			displayImage(g);
-		}
+		displayImage(g);
 	}
 
 }

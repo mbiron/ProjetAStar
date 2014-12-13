@@ -33,11 +33,11 @@ public class GridControler {
 	private List<AbstractMap> mapsList;
 	private List<AbstractAlgo> algosList;
 	private AbstractAlgo runningAlgo;
-	private Thread algoThread = null;
 	private int stepCounter;
+	private boolean isPaused;
 
 	private enum TIMER {
-		E_0MS, E_50MS, E_100MS, E_500MS
+		E_0MS, E_50MS, E_100MS, E_500MS, E_1S
 	};
 
 	private TIMER timerValue;
@@ -93,6 +93,8 @@ public class GridControler {
 			return 100;
 		case E_500MS:
 			return 500;
+		case E_1S:
+			return 1000;
 		case E_50MS:
 		default:
 			return 50;
@@ -112,48 +114,59 @@ public class GridControler {
 	public void initIHM() {
 		if (mainFrame == null) {
 			mainFrame = new MainFrame();
-			mainFrame.setVisible(false);
 		}
-		// Get first algo to run
-		runningAlgo = mainFrame.getControlPanel().getSelectedAlgo();
-	}
-
-	public void start() {
-		log.info("start");
-		runningAlgo.stopRunning();
-		try {
-			log.info("Wait for thread end");
-			// Thread.sleep(1000);
-			if (algoThread != null)
-				algoThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		mainFrame.setVisible(false);
-
 		// Reinit IHM Counter
 		stepCounter = 0;
 		mainFrame.getControlPanel().updateCounter(stepCounter);
 
+		// Get first algo to run
+		try {
+			runningAlgo = mainFrame.getControlPanel().getSelectedAlgo()
+					.getClass().newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		// Map Regeneration
 		AbstractMap mapItem = mainFrame.getControlPanel().getSelectedMap();
 		GridPanel map = loadMap(mapItem);
 
 		// Identify start & end point on the map
-		
 		startPoint.setColor(Color.RED);
 		endPoint.setColor(Color.PINK);
 
 		mainFrame.setMap(map);
-
-		// Algo Regeneration
-		runningAlgo = mainFrame.getControlPanel().getSelectedAlgo();
-
 		mainFrame.setVisible(true);
-		algoThread = new Thread(runningAlgo);
-		algoThread.start();
-		log.info("run thread");
+	}
+
+	public void stop() {
+		runningAlgo.stopRunning();
+		try {
+			log.info("Wait for thread end");
+			runningAlgo.join(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		isPaused = false;
+	}
+
+	public void pause() {
+		isPaused = true;
+		runningAlgo.pauseAlgo();
+	}
+
+	public void reinit() {
+		initIHM();
+	}
+
+	public void start() {
+		if (isPaused) {
+			log.info("restart");
+			runningAlgo.resumeAlgo();
+			isPaused = false;
+		} else {
+			log.info("start");
+			runningAlgo.start();
+		}
 	}
 
 	// ********************************************//

@@ -26,7 +26,7 @@ public class BFS extends AbstractAlgo {
 	}
 
 	@Override
-	public int getId() {
+	public int getAlgoId() {
 		return ALGOS_ID.BFS.ordinal();
 	}
 
@@ -39,7 +39,7 @@ public class BFS extends AbstractAlgo {
 		Map<AbstractFloor, AbstractFloor> previous = new HashMap<>();
 
 		log.info("start " + this);
-		while (current != EndPoint && !squares.isEmpty() && !stop) {
+		while (current != EndPoint && !squares.isEmpty() && checkContinues()) {
 			current = squares.getFirst();
 			squares.remove(current);
 
@@ -58,6 +58,8 @@ public class BFS extends AbstractAlgo {
 			
 			// Increase IHM step counter
 			GridControler.getInstance().nextStep();
+			
+			
 			try {
 				Thread.sleep(GridControler.getInstance().getTimerValue());
 			} catch (InterruptedException e) {
@@ -67,7 +69,7 @@ public class BFS extends AbstractAlgo {
 		}
 
 		log.info("end " + this);
-		if(stop) return null;
+		if(!checkContinues()) return null;
 		log.info("compute path");
 		LinkedList<AbstractFloor> path = new LinkedList<>();
 		
@@ -78,7 +80,6 @@ public class BFS extends AbstractAlgo {
 			current = previous.get(current);
 			path.addFirst(current);
 		}
-		log.info("return");
 		
 		return path;
 	}

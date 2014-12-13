@@ -9,33 +9,46 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 
 // TODO extends thread
-public abstract class AbstractAlgo implements Runnable {
+public abstract class AbstractAlgo extends Thread {
 
 	private static final Logger log = Logger.getLogger(AbstractAlgo.class);
-	protected volatile boolean stop = false;
+	private volatile boolean stop = false;
+	private volatile boolean paused = false;
 
 	public abstract String getLabel();
 
-	public abstract int getId();
+	public abstract int getAlgoId();
 
 	public abstract LinkedList<AbstractFloor> compute(AbstractFloor StartPoint,
 			AbstractFloor EndPoint);
+	
+	protected synchronized boolean checkContinues(){
+		while(paused && !stop);
+		return !stop;
+	}
 
 	public String toString() {
 		return getLabel();
 	}
 
+	public void pauseAlgo(){
+		log.debug("pauseAlgo");
+		paused = true;
+	}
+	
+	public void resumeAlgo(){
+		log.debug("resumeAlgo");
+		paused = false;
+	}
+	
 	public void stopRunning() {
 		stop = true;
 	}
 
 	public void run() {
 		stop = false;
-		GridControler.getInstance().getStartPoint();
-
 		LinkedList<AbstractFloor> path = compute(GridControler.getInstance().getStartPoint(),
 				GridControler.getInstance().getEndPoint());
-		log.info("path computed!");
 		
 		if (!stop && path != null){
 			GridControler.getInstance().drawPath(path, Color.GREEN);

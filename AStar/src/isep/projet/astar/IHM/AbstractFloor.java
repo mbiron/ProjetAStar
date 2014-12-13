@@ -37,8 +37,8 @@ public abstract class AbstractFloor extends JPanel {
 
 		setPreferredSize(new Dimension(20, 20));
 		setBackground(Color.BLACK);
-		//Border whiteline = BorderFactory.createLineBorder(Color.BLACK, 5);
-		//this.setBorder(whiteline);
+		// Border whiteline = BorderFactory.createLineBorder(Color.BLACK, 5);
+		// this.setBorder(whiteline);
 
 		setVisible(true);
 	}
@@ -49,18 +49,20 @@ public abstract class AbstractFloor extends JPanel {
 		repaint();
 	}
 
-	public void setColor(Color c){
+	public void setColor(Color c) {
 		image = null;
 		setBackground(c);
 		repaint();
 	}
-	
-	protected void displayImage(Graphics g){
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(image, 1, 1, getWidth() - 2, getHeight() - 2, null);
-		g2.dispose();
+
+	protected void displayImage(Graphics g) {
+		if (image != null) {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.drawImage(image, 1, 1, getWidth() - 2, getHeight() - 2, null);
+			g2.dispose();
+		}
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 

@@ -27,6 +27,7 @@ public class ControlPanel extends JPanel {
 	private JLabel counter;
 	private JComboBox<AbstractMap> maps;
 	private JComboBox<AbstractAlgo> algos;
+	private TimeControlPanel timeControlPanel;
 
 	public ControlPanel() {
 		textMap = new JLabel("Choose Map");
@@ -34,6 +35,7 @@ public class ControlPanel extends JPanel {
 		counter = new JLabel("Counter = " + 0);
 		maps = new JComboBox<>();
 		algos = new JComboBox<>();
+		timeControlPanel = new TimeControlPanel();
 
 		for (AbstractMap map : GridControler.getInstance().getMapsCollection()) {
 			maps.addItem(map);
@@ -47,7 +49,8 @@ public class ControlPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Ask for restart
-				GridControler.getInstance().start();
+				GridControler.getInstance().stop();
+				GridControler.getInstance().reinit();
 			}
 		});
 
@@ -55,7 +58,8 @@ public class ControlPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Ask for restart
-				GridControler.getInstance().start();
+				GridControler.getInstance().stop();
+				GridControler.getInstance().reinit();
 			}
 		});
 
@@ -69,6 +73,7 @@ public class ControlPanel extends JPanel {
 		maps.setAlignmentX(Component.CENTER_ALIGNMENT);
 		algos.setAlignmentX(Component.CENTER_ALIGNMENT);
 		counter.setAlignmentX(Component.CENTER_ALIGNMENT);
+		timeControlPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		maps.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 20));
 		algos.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 20));
@@ -82,6 +87,9 @@ public class ControlPanel extends JPanel {
 		add(textAlgo);
 		add(algos);
 		add(counter);
+		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
+				50)));
+		add(timeControlPanel);
 
 		setVisible(true);
 	}

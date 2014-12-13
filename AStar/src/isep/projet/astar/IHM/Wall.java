@@ -2,7 +2,6 @@ package isep.projet.astar.IHM;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.io.File;
 import java.io.IOException;
 
@@ -12,7 +11,7 @@ public class Wall extends AbstractFloor {
 
 	public Wall() {
 		super();
-		//this.setBackground(Color.DARK_GRAY);
+		// this.setBackground(Color.DARK_GRAY);
 		setBackground(Color.WHITE);
 		try {
 			image = ImageIO.read(new File("wall.png"));
@@ -23,11 +22,10 @@ public class Wall extends AbstractFloor {
 
 		this.movCost = -1; // Can't go though walls
 	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (image != null) {
-			displayImage(g);
-		}
+		displayImage(g);
 	}
 
 }

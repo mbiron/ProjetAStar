@@ -75,8 +75,8 @@ public class ControlPanel extends JPanel {
 		counter.setAlignmentX(Component.CENTER_ALIGNMENT);
 		timeControlPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		maps.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 20));
-		algos.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 20));
+		maps.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH - 30, 20));
+		algos.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH - 30, 20));
 
 		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
 				75)));
@@ -100,6 +100,14 @@ public class ControlPanel extends JPanel {
 
 	public AbstractMap getSelectedMap() {
 		return (AbstractMap) maps.getSelectedItem();
+	}
+	
+	public int getTempoValue(){
+		return timeControlPanel.getTempo();
+	}
+	
+	public void reinitButtons(){
+		timeControlPanel.resetStartButton();
 	}
 
 	public AbstractAlgo getSelectedAlgo() {

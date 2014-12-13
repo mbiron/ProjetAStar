@@ -4,7 +4,6 @@ import isep.projet.astar.Controler.GridControler;
 import isep.projet.astar.Data.Constants;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,24 +12,32 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class TimeControlPanel extends JPanel {
 
 	private JButton startPauseButton;
 	private ImageIcon startIcon;
 	private ImageIcon pauseIcon;
+	private ImageIcon restartIcon;
 	private JButton stopButton;
 	private JSlider speedSlider;
+	private JLabel speedLabel;
 
 	public TimeControlPanel() {
 		startIcon = new ImageIcon("play.png");
 		pauseIcon = new ImageIcon("pause.png");
+		restartIcon = new ImageIcon("Restart.png");
 		startPauseButton = new JButton(startIcon);
 		stopButton = new JButton(new ImageIcon("stop.png"));
+		speedLabel = new JLabel("Running speed");
 		speedSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 4, 2);
+		//speedSlider = new JSlider(SwingConstants.HORIZONTAL, 1, 50, 10);
 
 		setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 100));
 		setRequestFocusEnabled(false);
@@ -38,7 +45,7 @@ public class TimeControlPanel extends JPanel {
 
 		startPauseButton.setBackground(Color.WHITE);
 		startPauseButton.setFocusable(false);
-		startPauseButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+		startPauseButton.setAlignmentX(LEFT_ALIGNMENT);
 		startPauseButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -46,16 +53,19 @@ public class TimeControlPanel extends JPanel {
 				if (startPauseButton.getIcon().equals(startIcon)) {
 					startPauseButton.setIcon(pauseIcon);
 					GridControler.getInstance().start();
-				} else {
+				} else if(startPauseButton.getIcon().equals(pauseIcon)) {
 					startPauseButton.setIcon(startIcon);
 					GridControler.getInstance().pause();
+				}else{
+					GridControler.getInstance().reinit();
+					startPauseButton.setIcon(startIcon);
 				}
 			}
 		});
 
 		stopButton.setBackground(Color.WHITE);
 		stopButton.setFocusable(false);
-		stopButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		stopButton.setAlignmentX(RIGHT_ALIGNMENT);
 		stopButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -68,8 +78,20 @@ public class TimeControlPanel extends JPanel {
 			}
 		});
 
-		speedSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
+		speedLabel.setAlignmentX(CENTER_ALIGNMENT);
+		
+		speedSlider.setAlignmentX(CENTER_ALIGNMENT);
+		//speedSlider.setMajorTickSpacing(1);
+		speedSlider.setMinorTickSpacing(1);
 		speedSlider.setPaintTicks(true);
+		//speedSlider.setPaintLabels(true);
+		speedSlider.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				GridControler.getInstance().updateTempo();	
+			}
+		});
 
 		JPanel buttons = new JPanel();
 
@@ -79,12 +101,22 @@ public class TimeControlPanel extends JPanel {
 		buttons.add(Box.createHorizontalGlue());
 		buttons.add(stopButton);
 		buttons.add(Box.createRigidArea(new Dimension(15, 0)));
-		buttons.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttons.setAlignmentX(CENTER_ALIGNMENT);
 
 		add(buttons);
+		add(Box.createRigidArea(new Dimension(0, 15)));
+		add(speedLabel);
+		add(Box.createRigidArea(new Dimension(0, 5)));
 		add(speedSlider);
 
 		setVisible(true);
 	}
+	
+	public void resetStartButton(){
+		startPauseButton.setIcon(restartIcon);
+	}
 
+	public int getTempo(){
+		return speedSlider.getValue();
+	}
 }

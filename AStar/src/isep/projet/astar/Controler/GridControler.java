@@ -35,18 +35,12 @@ public class GridControler {
 	private AbstractAlgo runningAlgo;
 	private int stepCounter;
 	private boolean isPaused;
-
-	private enum TIMER {
-		E_0MS, E_50MS, E_100MS, E_500MS, E_1S
-	};
-
-	private TIMER timerValue;
+	private int timerValue;
 
 	private GridControler() {
 		initMapsList();
 		initAlgosList();
 		squares = new HashMap<>();
-		timerValue = TIMER.E_50MS;
 	}
 
 	// ********************************************//
@@ -86,19 +80,7 @@ public class GridControler {
 	}
 
 	public synchronized int getTimerValue() {
-		switch (timerValue) {
-		case E_0MS:
-			return 0;
-		case E_100MS:
-			return 100;
-		case E_500MS:
-			return 500;
-		case E_1S:
-			return 1000;
-		case E_50MS:
-		default:
-			return 50;
-		}
+		return timerValue;
 	}
 
 	// ********************************************//
@@ -109,6 +91,8 @@ public class GridControler {
 			square.setColor(color);
 			square.repaint();
 		}
+		// Enable reset
+		mainFrame.getControlPanel().reinitButtons();
 	}
 
 	public void initIHM() {
@@ -136,6 +120,31 @@ public class GridControler {
 
 		mainFrame.setMap(map);
 		mainFrame.setVisible(true);
+		
+		updateTempo();
+		
+	}
+	
+	public void updateTempo(){
+		log.debug("updateTempo " + mainFrame.getControlPanel().getTempoValue());
+		switch (mainFrame.getControlPanel().getTempoValue()) {
+		case 4:
+			timerValue =  10;
+			break;
+		case 3:
+			timerValue = 50;
+			break;
+		case 1:
+			timerValue = 500;
+			break;
+		case 0:
+			timerValue = 1000;
+			break;
+		case 2:
+		default:
+			timerValue = 100;
+		}
+		//timerValue = 510 - (mainFrame.getControlPanel().getTempoValue() * 10);
 	}
 
 	public void stop() {

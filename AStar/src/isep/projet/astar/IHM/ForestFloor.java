@@ -20,7 +20,7 @@ public class ForestFloor extends AbstractFloor {
 		}
 
 		//this.setBackground(Color.GREEN);
-		this.movCost = 20;
+		this.movCost = 10;
 	}
 	
 	public void paintComponent(Graphics g) {

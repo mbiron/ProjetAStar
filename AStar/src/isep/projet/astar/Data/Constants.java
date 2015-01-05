@@ -13,5 +13,5 @@ public class Constants {
 	 public static final int MAIN_FRAME_MIN_WIDTH = SQUARE_SIDE * 20 + CONTROL_PANEL_WIDTH; 
 	 
 	 public static enum MAPS_ID{EmptyMap,Forest,Desert,Maze};
-	 public static enum ALGOS_ID{BFS,DIJKSTRA,ASTAR};
+	 public static enum ALGOS_ID{BFS,DIJKSTRA,GREEDYBFS,ASTAR};
 }

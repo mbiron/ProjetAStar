@@ -19,7 +19,7 @@ public class SandFloor extends AbstractFloor {
 			e.printStackTrace();
 		}
 		//this.setBackground(Color.YELLOW);
-		this.movCost = 10;
+		this.movCost = 20;
 	}
 	
 	public void paintComponent(Graphics g) {

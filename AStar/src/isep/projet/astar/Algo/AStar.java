@@ -40,19 +40,14 @@ public class AStar extends AbstractAlgo {
 		Map<AbstractFloor, Integer> totCost = new HashMap<>();
 		AbstractFloor current = StartPoint;
 
-		log.info("A la declaration, squares = " + squares.toString());
 		squares.add(new CoupleSquarePrio(StartPoint, 0));
-		log.info("Apres ajout firstCouple, squares = " + squares.toString());
 
 		previous.put(StartPoint, null);
 		totCost.put(StartPoint, 0);
 
-		log.info("start " + this);
 		while (current != EndPoint && !squares.isEmpty() && checkContinues()) {
 
-			log.info("avant remove, squares = " + squares.toString());
 			CoupleSquarePrio currentCouple = squares.remove();
-			log.info("apres remove, squares = " + squares.toString());
 
 			current = currentCouple.getSquare();
 			if (!current.isVisited())
@@ -65,16 +60,10 @@ public class AStar extends AbstractAlgo {
 
 					if (!totCost.containsKey(neighboor)
 							|| new_cost < totCost.get(neighboor)) {
-
 						totCost.put(neighboor, new_cost);
-						int priority = new_cost	+ heuristic(EndPoint, neighboor);
-						
-						log.info("priority = " + priority + " ==> " + new_cost
-								+ " + " + heuristic(EndPoint, neighboor));
-						
-						log.info("avant ajout, squares = " + squares.toString());
+						int priority = new_cost
+								+ heuristic(EndPoint, neighboor);
 						squares.add(new CoupleSquarePrio(neighboor, priority));
-						log.info("apres ajout, squares = " + squares.toString());
 						previous.put(neighboor, current);
 					}
 				}
@@ -91,12 +80,10 @@ public class AStar extends AbstractAlgo {
 			}
 		}
 
-		log.info("end " + this);
 		if (!checkContinues())
 			return null;
-		log.info("compute path");
-		log.info("Total move cost = " + totCost.get(EndPoint));
-		
+//		log.info("Total move cost = " + totCost.get(EndPoint));
+
 		LinkedList<AbstractFloor> path = new LinkedList<>();
 
 		current = EndPoint;
@@ -113,8 +100,9 @@ public class AStar extends AbstractAlgo {
 	}
 
 	private int heuristic(AbstractFloor from, AbstractFloor to) {
-		return (int) (Math.abs(from.getCoordinates().getX()	- to.getCoordinates().getX()) 
-				+ Math.abs(from.getCoordinates().getY() - to.getCoordinates().getY()));
+		return (int) (Math.abs(from.getCoordinates().getX()
+				- to.getCoordinates().getX()) + Math.abs(from.getCoordinates()
+				.getY() - to.getCoordinates().getY()));
 	}
 
 }

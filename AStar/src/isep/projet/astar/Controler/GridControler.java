@@ -4,6 +4,7 @@ import isep.projet.astar.Algo.AStar;
 import isep.projet.astar.Algo.AbstractAlgo;
 import isep.projet.astar.Algo.BFS;
 import isep.projet.astar.Algo.Dijkstra;
+import isep.projet.astar.Algo.GreedyBFS;
 import isep.projet.astar.Data.AbstractMap;
 import isep.projet.astar.Data.DesertMap;
 import isep.projet.astar.Data.ForestMap;
@@ -245,8 +246,9 @@ public class GridControler {
 	private void initAlgosList() {
 		algosList = new ArrayList<>();
 		algosList.add(new BFS());
-		algosList.add(new AStar());
 		algosList.add(new Dijkstra());
+		algosList.add(new GreedyBFS());
+		algosList.add(new AStar());
 	}
 
 }

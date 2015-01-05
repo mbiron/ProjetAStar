@@ -31,7 +31,6 @@ public class CoupleSquarePrio implements Comparable<CoupleSquarePrio> {
 		return ("square = "+square.getCoordinates().getX()+","+square.getCoordinates().getY()+" & priority = "+priority);
 	}
 	
-	//TODO supprimer commentaire (source : http://www.oopweb.com/Java/Documents/ThinkCSJav/Volume/chap16.htm)
 	
 	public int compareTo (CoupleSquarePrio obj) { 
         int a = this.priority; 

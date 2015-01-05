@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
+
 // TODO extends thread
 public abstract class AbstractAlgo extends Thread {
 

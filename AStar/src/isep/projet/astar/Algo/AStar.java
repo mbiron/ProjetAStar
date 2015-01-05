@@ -4,16 +4,10 @@ import isep.projet.astar.Controler.GridControler;
 import isep.projet.astar.Data.Constants.ALGOS_ID;
 import isep.projet.astar.IHM.AbstractFloor;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
@@ -42,10 +36,10 @@ public class AStar extends AbstractAlgo {
 			AbstractFloor EndPoint) {
 		
 		PriorityQueue<CoupleSquarePrio> squares = new PriorityQueue<CoupleSquarePrio>();
-		log.info("à la déclaration, squares = "+squares.toString());
+		log.info("ï¿½ la dï¿½claration, squares = "+squares.toString());
 		CoupleSquarePrio firstCouple = new CoupleSquarePrio(StartPoint, 0);
 		squares.add(firstCouple);
-		log.info("après ajout firstCouple, squares = "+squares.toString());
+		log.info("aprï¿½s ajout firstCouple, squares = "+squares.toString());
 		AbstractFloor current = StartPoint;
 		Map<AbstractFloor, AbstractFloor> previous = new HashMap<>();
 		Map<AbstractFloor, Integer> cost_so_far = new HashMap<>();
@@ -56,7 +50,7 @@ public class AStar extends AbstractAlgo {
 		while (current != EndPoint && !squares.isEmpty() && checkContinues()) {
 			log.info("avant remove, squares = "+squares.toString());
 			CoupleSquarePrio currentCouple = squares.remove();
-			log.info("après remove, squares = "+squares.toString());
+			log.info("aprï¿½s remove, squares = "+squares.toString());
 			current = currentCouple.getSquare();
 
 			if (current.isVisited())
@@ -76,7 +70,7 @@ public class AStar extends AbstractAlgo {
 						CoupleSquarePrio newCouple = new CoupleSquarePrio(neighboor, priority);
 						log.info("avant ajout, squares = "+squares.toString());
 						squares.add(newCouple);
-						log.info("après ajout, squares = "+squares.toString());
+						log.info("aprï¿½s ajout, squares = "+squares.toString());
 						previous.put(neighboor, current);
 					}
 				}

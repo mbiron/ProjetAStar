@@ -2,7 +2,7 @@ package isep.projet.astar.Algo;
 
 import isep.projet.astar.IHM.AbstractFloor;
 
-public class CoupleSquarePrio implements Comparable {
+public class CoupleSquarePrio implements Comparable<CoupleSquarePrio> {
 	private AbstractFloor square;
 	private int priority;
 	
@@ -33,11 +33,9 @@ public class CoupleSquarePrio implements Comparable {
 	
 	//TODO supprimer commentaire (source : http://www.oopweb.com/Java/Documents/ThinkCSJav/Volume/chap16.htm)
 	
-	public int compareTo (Object obj) { 
-		CoupleSquarePrio that = (CoupleSquarePrio) obj; 
-
+	public int compareTo (CoupleSquarePrio obj) { 
         int a = this.priority; 
-        int b = that.priority; 
+        int b = obj.priority; 
 
         System.out.println("a = "+a+" & b = "+b);
         

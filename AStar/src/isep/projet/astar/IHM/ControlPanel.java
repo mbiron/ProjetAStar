@@ -36,7 +36,7 @@ public class ControlPanel extends JPanel {
 		textAlgo = new JLabel("Choose Algo");
 		counter = new JLabel("Counter = " + 0);
 		pathSize = new JLabel("Path Length = " + 0);
-		pathCoast = new JLabel("Path Coast = " + 0);
+		pathCoast = new JLabel("Path Cost = " + 0);
 		maps = new JComboBox<>();
 		algos = new JComboBox<>();
 		timeControlPanel = new TimeControlPanel();
@@ -115,7 +115,7 @@ public class ControlPanel extends JPanel {
 	}
 	
 	public void updatePathCoast(int pathTotCoast) {
-		pathCoast.setText("Path Coast = " + pathTotCoast);
+		pathCoast.setText("Path Cost = " + pathTotCoast);
 		pathCoast.setVisible(true);
 	}
 	

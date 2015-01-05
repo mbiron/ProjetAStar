@@ -5,6 +5,7 @@ import isep.projet.astar.Algo.AbstractAlgo;
 import isep.projet.astar.Algo.BFS;
 import isep.projet.astar.Algo.Dijkstra;
 import isep.projet.astar.Data.AbstractMap;
+import isep.projet.astar.Data.DesertMap;
 import isep.projet.astar.Data.ForestMap;
 import isep.projet.astar.Data.MazeMap;
 import isep.projet.astar.Data.WallMap;
@@ -13,6 +14,7 @@ import isep.projet.astar.IHM.ForestFloor;
 import isep.projet.astar.IHM.GridPanel;
 import isep.projet.astar.IHM.MainFrame;
 import isep.projet.astar.IHM.RockFloor;
+import isep.projet.astar.IHM.SandFloor;
 import isep.projet.astar.IHM.Wall;
 
 import java.awt.Color;
@@ -96,10 +98,10 @@ public class GridControler {
 			square.repaint();
 			totalCoast += square.getMovCost();
 		}
-		//Display Path Characteristics
+		// Display Path Characteristics
 		mainFrame.getControlPanel().updatePathSize(path.size());
 		mainFrame.getControlPanel().updatePathCoast(totalCoast);
-		
+
 		// Enable reset
 		mainFrame.getControlPanel().reinitButtons();
 	}
@@ -129,16 +131,16 @@ public class GridControler {
 
 		mainFrame.setMap(map);
 		mainFrame.setVisible(true);
-		
+
 		updateTempo();
-		
+
 	}
-	
-	public void updateTempo(){
+
+	public void updateTempo() {
 		log.debug("updateTempo " + mainFrame.getControlPanel().getTempoValue());
 		switch (mainFrame.getControlPanel().getTempoValue()) {
 		case 4:
-			timerValue =  10;
+			timerValue = 10;
 			break;
 		case 3:
 			timerValue = 50;
@@ -153,7 +155,8 @@ public class GridControler {
 		default:
 			timerValue = 100;
 		}
-		//timerValue = 510 - (mainFrame.getControlPanel().getTempoValue() * 10);
+		// timerValue = 510 - (mainFrame.getControlPanel().getTempoValue() *
+		// 10);
 	}
 
 	public void stop() {
@@ -199,19 +202,28 @@ public class GridControler {
 				Point p = new Point(x, y);
 				int value = (Map.getMap())[y][x];
 
-				if (value == Map.getCodeEnd()) {
+				switch (value) {
+				case AbstractMap.CODE_END:
 					pan = new RockFloor();
 					endPoint = pan;
-				} else if (value == Map.getCodeStart()) {
+					break;
+				case AbstractMap.CODE_START:
 					pan = new RockFloor();
 					startPoint = pan;
-				} else if (value == Map.getCodeRock()) {
+					break;
+				case AbstractMap.CODE_ROCK:
 					pan = new RockFloor();
-				} else if (value == Map.getCodeWall()) {
+					break;
+				case AbstractMap.CODE_WALL:
 					pan = new Wall();
-				} else if (value == Map.getCodeForest()) {
+					break;
+				case AbstractMap.CODE_FOREST:
 					pan = new ForestFloor();
-				} else {
+					break;
+				case AbstractMap.CODE_SAND:
+					pan = new SandFloor();
+					break;
+				default:
 					log.error("Unknown map Code");
 					return null;
 				}
@@ -229,6 +241,7 @@ public class GridControler {
 		mapsList.add(new WallMap());
 		mapsList.add(new MazeMap());
 		mapsList.add(new ForestMap());
+		mapsList.add(new DesertMap());
 	}
 
 	private void initAlgosList() {

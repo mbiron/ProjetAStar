@@ -53,9 +53,8 @@ public class AStar extends AbstractAlgo {
 			log.info("apr�s remove, squares = "+squares.toString());
 			current = currentCouple.getSquare();
 
-			if (current.isVisited())
-				continue;
-			current.setVisited();
+			if (!current.isVisited())
+				current.setVisited();
 
 			// log.debug(current);
 

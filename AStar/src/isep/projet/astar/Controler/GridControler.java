@@ -133,7 +133,6 @@ public class GridControler {
 		mainFrame.setVisible(true);
 
 		updateTempo();
-
 	}
 
 	public void updateTempo() {
@@ -155,8 +154,6 @@ public class GridControler {
 		default:
 			timerValue = 100;
 		}
-		// timerValue = 510 - (mainFrame.getControlPanel().getTempoValue() *
-		// 10);
 	}
 
 	public void stop() {
@@ -176,6 +173,7 @@ public class GridControler {
 	}
 
 	public void reinit() {
+		squares.clear();
 		initIHM();
 	}
 

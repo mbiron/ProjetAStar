@@ -39,8 +39,8 @@ public class CoupleSquarePrio implements Comparable<CoupleSquarePrio> {
 
         System.out.println("a = "+a+" & b = "+b);
         
-        if (a<b) return 1; 
-        if (a>b) return -1; 
+        if (a<b) return -1; 
+        if (a>b) return 1; 
         return 0; 
     } 
 	

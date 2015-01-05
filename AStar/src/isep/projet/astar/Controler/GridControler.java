@@ -3,6 +3,7 @@ package isep.projet.astar.Controler;
 import isep.projet.astar.Algo.AStar;
 import isep.projet.astar.Algo.AbstractAlgo;
 import isep.projet.astar.Algo.BFS;
+import isep.projet.astar.Algo.Dijkstra;
 import isep.projet.astar.Data.AbstractMap;
 import isep.projet.astar.Data.Map1;
 import isep.projet.astar.Data.Map2;
@@ -223,6 +224,7 @@ public class GridControler {
 		algosList = new ArrayList<>();
 		algosList.add(new BFS());
 		algosList.add(new AStar());
+		algosList.add(new Dijkstra());
 	}
 
 }

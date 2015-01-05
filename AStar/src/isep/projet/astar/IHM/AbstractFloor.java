@@ -12,13 +12,11 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import org.apache.log4j.Logger;
 
-public abstract class AbstractFloor extends JPanel {
+public abstract class AbstractFloor extends JPanel implements Comparable<AbstractFloor> {
 
 	/**
 	 * 
@@ -117,5 +115,10 @@ public abstract class AbstractFloor extends JPanel {
 	// for debug
 	public String toString() {
 		return coordinates.toString();
+	}
+	
+	@Override
+	public int compareTo(AbstractFloor o) {
+		return this.movCost - o.getMovCost();
 	}
 }

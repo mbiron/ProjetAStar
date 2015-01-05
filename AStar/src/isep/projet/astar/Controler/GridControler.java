@@ -90,10 +90,16 @@ public class GridControler {
 	// ***************** Controls *****************//
 	// ********************************************//
 	public void drawPath(LinkedList<AbstractFloor> path, Color color) {
+		int totalCoast = 0;
 		for (AbstractFloor square : path) {
 			square.setColor(color);
 			square.repaint();
+			totalCoast += square.getMovCost();
 		}
+		//Display Path Characteristics
+		mainFrame.getControlPanel().updatePathSize(path.size());
+		mainFrame.getControlPanel().updatePathCoast(totalCoast);
+		
 		// Enable reset
 		mainFrame.getControlPanel().reinitButtons();
 	}
@@ -104,7 +110,7 @@ public class GridControler {
 		}
 		// Reinit IHM Counter
 		stepCounter = 0;
-		mainFrame.getControlPanel().updateCounter(stepCounter);
+		mainFrame.getControlPanel().reinit();
 
 		// Get first algo to run
 		try {

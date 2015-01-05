@@ -25,6 +25,8 @@ public class ControlPanel extends JPanel {
 	private JLabel textMap;
 	private JLabel textAlgo;
 	private JLabel counter;
+	private JLabel pathSize;
+	private JLabel pathCoast;
 	private JComboBox<AbstractMap> maps;
 	private JComboBox<AbstractAlgo> algos;
 	private TimeControlPanel timeControlPanel;
@@ -33,10 +35,15 @@ public class ControlPanel extends JPanel {
 		textMap = new JLabel("Choose Map");
 		textAlgo = new JLabel("Choose Algo");
 		counter = new JLabel("Counter = " + 0);
+		pathSize = new JLabel("Path Length = " + 0);
+		pathCoast = new JLabel("Path Coast = " + 0);
 		maps = new JComboBox<>();
 		algos = new JComboBox<>();
 		timeControlPanel = new TimeControlPanel();
-
+		
+		pathSize.setVisible(false);
+		pathCoast.setVisible(false);
+		
 		for (AbstractMap map : GridControler.getInstance().getMapsCollection()) {
 			maps.addItem(map);
 		}
@@ -73,13 +80,15 @@ public class ControlPanel extends JPanel {
 		maps.setAlignmentX(Component.CENTER_ALIGNMENT);
 		algos.setAlignmentX(Component.CENTER_ALIGNMENT);
 		counter.setAlignmentX(Component.CENTER_ALIGNMENT);
+		pathSize.setAlignmentX(Component.CENTER_ALIGNMENT);
+		pathCoast.setAlignmentX(Component.CENTER_ALIGNMENT);
 		timeControlPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		maps.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH - 30, 20));
 		algos.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH - 30, 20));
 
 		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
-				75)));
+				50)));
 		add(textMap);
 		add(maps);
 		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
@@ -87,8 +96,10 @@ public class ControlPanel extends JPanel {
 		add(textAlgo);
 		add(algos);
 		add(counter);
+		add(pathSize);
+		add(pathCoast);
 		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
-				50)));
+				30)));
 		add(timeControlPanel);
 
 		setVisible(true);
@@ -96,6 +107,22 @@ public class ControlPanel extends JPanel {
 
 	public synchronized void updateCounter(int counterValue) {
 		counter.setText("Counter = " + counterValue);
+	}
+	
+	public void updatePathSize(int pathLength) {
+		pathSize.setText("Path Length = " + pathLength);
+		pathSize.setVisible(true);
+	}
+	
+	public void updatePathCoast(int pathTotCoast) {
+		pathCoast.setText("Path Coast = " + pathTotCoast);
+		pathCoast.setVisible(true);
+	}
+	
+	public void reinit(){
+		counter.setText("Counter = " + 0);
+		pathSize.setVisible(false);
+		pathCoast.setVisible(false);
 	}
 
 	public AbstractMap getSelectedMap() {

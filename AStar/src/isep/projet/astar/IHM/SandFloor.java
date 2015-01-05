@@ -8,7 +8,7 @@ public class SandFloor extends AbstractFloor {
 	public SandFloor() {
 		super();
 		this.setBackground(Color.YELLOW);
-		this.movCost = 4;
+		this.movCost = 10;
 	}
 
 }

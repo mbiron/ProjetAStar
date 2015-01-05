@@ -5,9 +5,11 @@ import isep.projet.astar.Algo.AbstractAlgo;
 import isep.projet.astar.Algo.BFS;
 import isep.projet.astar.Algo.Dijkstra;
 import isep.projet.astar.Data.AbstractMap;
-import isep.projet.astar.Data.Map1;
-import isep.projet.astar.Data.Map2;
+import isep.projet.astar.Data.ForestMap;
+import isep.projet.astar.Data.MazeMap;
+import isep.projet.astar.Data.WallMap;
 import isep.projet.astar.IHM.AbstractFloor;
+import isep.projet.astar.IHM.ForestFloor;
 import isep.projet.astar.IHM.GridPanel;
 import isep.projet.astar.IHM.MainFrame;
 import isep.projet.astar.IHM.RockFloor;
@@ -201,6 +203,8 @@ public class GridControler {
 					pan = new RockFloor();
 				} else if (value == Map.getCodeWall()) {
 					pan = new Wall();
+				} else if (value == Map.getCodeForest()) {
+					pan = new ForestFloor();
 				} else {
 					log.error("Unknown map Code");
 					return null;
@@ -216,8 +220,9 @@ public class GridControler {
 
 	private void initMapsList() {
 		mapsList = new ArrayList<>();
-		mapsList.add(new Map2());
-		mapsList.add(new Map1());
+		mapsList.add(new WallMap());
+		mapsList.add(new MazeMap());
+		mapsList.add(new ForestMap());
 	}
 
 	private void initAlgosList() {

@@ -12,6 +12,6 @@ public class Constants {
 	 public static final int MAIN_FRAME_MIN_HEIGHT = SQUARE_SIDE * 20; 
 	 public static final int MAIN_FRAME_MIN_WIDTH = SQUARE_SIDE * 20 + CONTROL_PANEL_WIDTH; 
 	 
-	 public static enum MAPS_ID{EmptyMap,Maze};
+	 public static enum MAPS_ID{EmptyMap,Forest,Maze};
 	 public static enum ALGOS_ID{BFS,DIJKSTRA,ASTAR};
 }

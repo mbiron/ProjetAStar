@@ -2,15 +2,10 @@ package isep.projet.astar.Data;
 
 import isep.projet.astar.Data.Constants.MAPS_ID;
 
-public class Map1 extends AbstractMap {
+public class MazeMap extends AbstractMap {
 
 	private final int HEIGHT = 30;
 	private final int WIDTH = 30;
-
-	private final int CODE_START = 91;
-	private final int CODE_END = 115;
-	private final int CODE_WALL = 50;
-	private final int CODE_ROCK = 49;
 
 	// Générée grace a Tiled : http://www.mapeditor.org/
 	//
@@ -86,22 +81,6 @@ public class Map1 extends AbstractMap {
 
 	public int getWidth() {
 		return WIDTH;
-	}
-
-	public int getCodeStart() {
-		return CODE_START;
-	}
-
-	public int getCodeEnd() {
-		return CODE_END;
-	}
-
-	public int getCodeWall() {
-		return CODE_WALL;
-	}
-
-	public int getCodeRock() {
-		return CODE_ROCK;
 	}
 
 	public int[][] getMap() {

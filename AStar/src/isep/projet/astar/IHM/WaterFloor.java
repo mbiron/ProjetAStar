@@ -8,7 +8,7 @@ public class WaterFloor extends AbstractFloor {
 	public WaterFloor() {
 		super();
 		this.setBackground(Color.BLUE);
-		this.movCost = 7;
+		this.movCost = 30;
 	}
 
 }

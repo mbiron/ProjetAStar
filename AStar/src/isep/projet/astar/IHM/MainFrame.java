@@ -3,10 +3,13 @@ package isep.projet.astar.IHM;
 import isep.projet.astar.Data.Constants;
 
 import java.awt.BorderLayout;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
@@ -27,7 +30,9 @@ public class MainFrame extends JFrame {
 		setSize(new Dimension(Constants.MAIN_FRAME_WIDTH, Constants.MAIN_FRAME_HEIGHT));
 		setMinimumSize(new Dimension(Constants.MAIN_FRAME_MIN_WIDTH,Constants.MAIN_FRAME_MIN_HEIGHT));
 		controlPanel = new ControlPanel();
-		getContentPane().add(controlPanel,BorderLayout.CENTER);
+		getContentPane().add(new JPanel(),BorderLayout.LINE_START);
+		getContentPane().add(controlPanel,BorderLayout.LINE_END);
+		
 		
 		pack();
 	}
@@ -37,8 +42,7 @@ public class MainFrame extends JFrame {
 			remove(map);
 		}
 		this.map = newMap;
-		getContentPane().add(map,BorderLayout.LINE_START);
-		//add(map);
+		getContentPane().add(map,BorderLayout.CENTER);
 		pack();
 	}
 	

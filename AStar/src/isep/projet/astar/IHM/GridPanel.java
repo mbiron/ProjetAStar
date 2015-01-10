@@ -24,7 +24,7 @@ public class GridPanel extends JPanel {
 	private static final Logger log = Logger.getLogger(GridPanel.class);
 
 	public GridPanel(int width, int height) {
-		setMaximumSize(new java.awt.Dimension(width * Constants.SQUARE_SIDE,height * Constants.SQUARE_SIDE));
+		setSize(new java.awt.Dimension(width * Constants.SQUARE_SIDE,height * Constants.SQUARE_SIDE));
 		setRequestFocusEnabled(false);
 		setLayout(new GridLayout(height, width));
 

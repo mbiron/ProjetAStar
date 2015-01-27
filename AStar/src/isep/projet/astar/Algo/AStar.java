@@ -50,6 +50,7 @@ public class AStar extends AbstractAlgo {
 			CoupleSquarePrio currentCouple = squares.remove();
 
 			current = currentCouple.getSquare();
+
 			if (!current.isVisited())
 				current.setVisited();
 
@@ -82,7 +83,7 @@ public class AStar extends AbstractAlgo {
 
 		if (!checkContinues())
 			return null;
-//		log.info("Total move cost = " + totCost.get(EndPoint));
+		// log.info("Total move cost = " + totCost.get(EndPoint));
 
 		LinkedList<AbstractFloor> path = new LinkedList<>();
 

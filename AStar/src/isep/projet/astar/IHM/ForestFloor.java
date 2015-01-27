@@ -19,10 +19,10 @@ public class ForestFloor extends AbstractFloor {
 			e.printStackTrace();
 		}
 
-		//this.setBackground(Color.GREEN);
+		// this.setBackground(Color.GREEN);
 		this.movCost = 10;
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		displayImage(g);

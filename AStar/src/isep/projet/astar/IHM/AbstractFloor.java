@@ -16,11 +16,12 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
-public abstract class AbstractFloor extends JPanel implements Comparable<AbstractFloor> {
+/*
+ * This class describes an IHM component used to represents squares in maps
+ */
+public abstract class AbstractFloor extends JPanel implements
+		Comparable<AbstractFloor> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(AbstractFloor.class);
 	protected int movCost;
@@ -35,15 +36,12 @@ public abstract class AbstractFloor extends JPanel implements Comparable<Abstrac
 
 		setPreferredSize(new Dimension(20, 20));
 		setBackground(Color.BLACK);
-		// Border whiteline = BorderFactory.createLineBorder(Color.BLACK, 5);
-		// this.setBorder(whiteline);
 
 		setVisible(true);
 	}
 
 	public void setVisited() {
 		visited = true;
-		// setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		repaint();
 	}
 
@@ -116,7 +114,7 @@ public abstract class AbstractFloor extends JPanel implements Comparable<Abstrac
 	public String toString() {
 		return coordinates.toString();
 	}
-	
+
 	@Override
 	public int compareTo(AbstractFloor o) {
 		return this.movCost - o.getMovCost();

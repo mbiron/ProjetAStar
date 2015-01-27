@@ -7,12 +7,6 @@ public class WallMap extends AbstractMap {
 	private final int HEIGHT = 20;
 	private final int WIDTH = 30;
 
-	// Générée grace a Tiled : http://www.mapeditor.org/
-	//
-	// Sauvegarde en mode CSV
-	//
-	// REGEX pour mise en forme : ,\n --> },\n
-	// ^. --> {
 	private final int[][] map = {
 			{ 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49,
 					49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49 },

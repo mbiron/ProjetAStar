@@ -1,5 +1,14 @@
 package isep.projet.astar.Data;
 
+/*
+ * This class describes a map. 
+ * A map is stored in the int[][] format in classes that extends this class
+ * Maps are generated with Tiled : http://www.mapeditor.org/
+ * 
+ *  Saved in CSV mode
+ *  REGEX pour mise en forme : 	,\n --> },\n
+ *  							^.  --> {
+ */
 public abstract class AbstractMap {
 
 	public static final int CODE_START = 91;

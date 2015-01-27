@@ -11,7 +11,6 @@ import java.util.PriorityQueue;
 
 import org.apache.log4j.Logger;
 
-
 /**
  * This class contains implementation of Dijkstra's Algorithm
  * 
@@ -42,14 +41,14 @@ public class Dijkstra extends AbstractAlgo {
 		Map<AbstractFloor, Integer> totCost = new HashMap<>();
 		AbstractFloor current = StartPoint;
 
-//		log.info("A la declaration, squares = " + squares.toString());
+		// log.info("A la declaration, squares = " + squares.toString());
 		squares.add(new CoupleSquarePrio(StartPoint, 0));
-//		log.info("Apres ajout firstCouple, squares = " + squares.toString());
+		// log.info("Apres ajout firstCouple, squares = " + squares.toString());
 
 		previous.put(StartPoint, null);
 		totCost.put(StartPoint, 0);
 
-//		log.info("start " + this);
+		// log.info("start " + this);
 		while (current != EndPoint && !squares.isEmpty() && checkContinues()) {
 
 			log.info("avant remove, squares = " + squares.toString());
@@ -57,6 +56,7 @@ public class Dijkstra extends AbstractAlgo {
 			log.info("apres remove, squares = " + squares.toString());
 
 			current = currentCouple.getSquare();
+
 			if (!current.isVisited())
 				current.setVisited();
 
@@ -94,7 +94,7 @@ public class Dijkstra extends AbstractAlgo {
 			return null;
 		log.info("compute path");
 		log.info("Total move cost = " + totCost.get(EndPoint));
-		
+
 		LinkedList<AbstractFloor> path = new LinkedList<>();
 
 		current = EndPoint;

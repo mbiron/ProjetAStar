@@ -18,10 +18,10 @@ public class SandFloor extends AbstractFloor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//this.setBackground(Color.YELLOW);
+		// this.setBackground(Color.YELLOW);
 		this.movCost = 20;
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		displayImage(g);

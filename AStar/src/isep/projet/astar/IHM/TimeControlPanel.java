@@ -19,6 +19,10 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/*
+ * This panel is a part of the control panel
+ * It allows to start, stop, pause and modify speed of the algorithm
+ */
 public class TimeControlPanel extends JPanel {
 
 	private JButton startPauseButton;
@@ -37,7 +41,6 @@ public class TimeControlPanel extends JPanel {
 		stopButton = new JButton(new ImageIcon("stop.png"));
 		speedLabel = new JLabel("Running speed");
 		speedSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 4, 2);
-		//speedSlider = new JSlider(SwingConstants.HORIZONTAL, 1, 50, 10);
 
 		setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH, 100));
 		setRequestFocusEnabled(false);
@@ -53,10 +56,10 @@ public class TimeControlPanel extends JPanel {
 				if (startPauseButton.getIcon().equals(startIcon)) {
 					startPauseButton.setIcon(pauseIcon);
 					GridControler.getInstance().start();
-				} else if(startPauseButton.getIcon().equals(pauseIcon)) {
+				} else if (startPauseButton.getIcon().equals(pauseIcon)) {
 					startPauseButton.setIcon(startIcon);
 					GridControler.getInstance().pause();
-				}else{
+				} else {
 					GridControler.getInstance().reinit();
 					startPauseButton.setIcon(startIcon);
 				}
@@ -79,17 +82,15 @@ public class TimeControlPanel extends JPanel {
 		});
 
 		speedLabel.setAlignmentX(CENTER_ALIGNMENT);
-		
+
 		speedSlider.setAlignmentX(CENTER_ALIGNMENT);
-		//speedSlider.setMajorTickSpacing(1);
 		speedSlider.setMinorTickSpacing(1);
 		speedSlider.setPaintTicks(true);
-		//speedSlider.setPaintLabels(true);
 		speedSlider.addChangeListener(new ChangeListener() {
-			
+
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				GridControler.getInstance().updateTempo();	
+				GridControler.getInstance().updateTempo();
 			}
 		});
 
@@ -111,12 +112,12 @@ public class TimeControlPanel extends JPanel {
 
 		setVisible(true);
 	}
-	
-	public void resetStartButton(){
+
+	public void resetStartButton() {
 		startPauseButton.setIcon(restartIcon);
 	}
 
-	public int getTempo(){
+	public int getTempo() {
 		return speedSlider.getValue();
 	}
 }

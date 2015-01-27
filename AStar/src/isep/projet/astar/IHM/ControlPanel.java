@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
+/*
+ * This panel allows control of the IHM (choose map, choose algo and time control)
+ */
 public class ControlPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -40,10 +43,10 @@ public class ControlPanel extends JPanel {
 		maps = new JComboBox<>();
 		algos = new JComboBox<>();
 		timeControlPanel = new TimeControlPanel();
-		
+
 		pathSize.setVisible(false);
 		pathCoast.setVisible(false);
-		
+
 		for (AbstractMap map : GridControler.getInstance().getMapsCollection()) {
 			maps.addItem(map);
 		}
@@ -84,22 +87,21 @@ public class ControlPanel extends JPanel {
 		pathCoast.setAlignmentX(Component.CENTER_ALIGNMENT);
 		timeControlPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		maps.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH - 30, 20));
-		algos.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH - 30, 20));
+		maps.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH - 30,
+				20));
+		algos.setMaximumSize(new Dimension(Constants.CONTROL_PANEL_WIDTH - 30,
+				20));
 
-		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
-				50)));
+		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH, 50)));
 		add(textMap);
 		add(maps);
-		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
-				50)));
+		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH, 50)));
 		add(textAlgo);
 		add(algos);
 		add(counter);
 		add(pathSize);
 		add(pathCoast);
-		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH,
-				30)));
+		add(Box.createRigidArea(new Dimension(Constants.CONTROL_PANEL_WIDTH, 30)));
 		add(timeControlPanel);
 
 		setVisible(true);
@@ -108,18 +110,18 @@ public class ControlPanel extends JPanel {
 	public synchronized void updateCounter(int counterValue) {
 		counter.setText("Counter = " + counterValue);
 	}
-	
+
 	public void updatePathSize(int pathLength) {
 		pathSize.setText("Path Length = " + pathLength);
 		pathSize.setVisible(true);
 	}
-	
+
 	public void updatePathCoast(int pathTotCoast) {
 		pathCoast.setText("Path Cost = " + pathTotCoast);
 		pathCoast.setVisible(true);
 	}
-	
-	public void reinit(){
+
+	public void reinit() {
 		counter.setText("Counter = " + 0);
 		pathSize.setVisible(false);
 		pathCoast.setVisible(false);
@@ -128,12 +130,12 @@ public class ControlPanel extends JPanel {
 	public AbstractMap getSelectedMap() {
 		return (AbstractMap) maps.getSelectedItem();
 	}
-	
-	public int getTempoValue(){
+
+	public int getTempoValue() {
 		return timeControlPanel.getTempo();
 	}
-	
-	public void reinitButtons(){
+
+	public void reinitButtons() {
 		timeControlPanel.resetStartButton();
 	}
 

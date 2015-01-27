@@ -11,7 +11,6 @@ import java.util.PriorityQueue;
 
 import org.apache.log4j.Logger;
 
-
 /**
  * This class contains implementation of GDBF Algorithm
  * 
@@ -41,18 +40,19 @@ public class GreedyBFS extends AbstractAlgo {
 		Map<AbstractFloor, AbstractFloor> previous = new HashMap<>();
 		AbstractFloor current = StartPoint;
 
-//		log.info("A la declaration, squares = " + squares.toString());
+		// log.info("A la declaration, squares = " + squares.toString());
 		squares.add(new CoupleSquarePrio(StartPoint, 0));
-//		log.info("Apres ajout firstCouple, squares = " + squares.toString());
+		// log.info("Apres ajout firstCouple, squares = " + squares.toString());
 
 		previous.put(StartPoint, null);
 
-//		log.info("start " + this);
+		// log.info("start " + this);
 		while (current != EndPoint && !squares.isEmpty() && checkContinues()) {
 
 			CoupleSquarePrio currentCouple = squares.remove();
 
 			current = currentCouple.getSquare();
+
 			if (!current.isVisited())
 				current.setVisited();
 
@@ -81,7 +81,7 @@ public class GreedyBFS extends AbstractAlgo {
 
 		if (!checkContinues())
 			return null;
-		
+
 		LinkedList<AbstractFloor> path = new LinkedList<>();
 
 		current = EndPoint;
@@ -96,7 +96,7 @@ public class GreedyBFS extends AbstractAlgo {
 
 		/*******************************************************************/
 	}
-	
+
 	private int heuristic(AbstractFloor from, AbstractFloor to) {
 		return (int) (Math.abs(from.getCoordinates().getX()
 				- to.getCoordinates().getX()) + Math.abs(from.getCoordinates()

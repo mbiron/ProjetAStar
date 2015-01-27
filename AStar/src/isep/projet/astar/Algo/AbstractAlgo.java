@@ -8,8 +8,12 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
-
-// TODO extends thread
+/*
+ * This class describes algorithms. 
+ * They extend thread to be executed in parallel of IMH threads.
+ *  
+ * 
+ */
 public abstract class AbstractAlgo extends Thread {
 
 	private static final Logger log = Logger.getLogger(AbstractAlgo.class);
@@ -22,9 +26,9 @@ public abstract class AbstractAlgo extends Thread {
 
 	public abstract LinkedList<AbstractFloor> compute(AbstractFloor StartPoint,
 			AbstractFloor EndPoint);
-	
-	protected synchronized boolean checkContinues(){
-		while(paused && !stop);
+
+	protected synchronized boolean checkContinues() {
+		while (paused && !stop);
 		return !stop;
 	}
 
@@ -32,26 +36,26 @@ public abstract class AbstractAlgo extends Thread {
 		return getLabel();
 	}
 
-	public void pauseAlgo(){
+	public void pauseAlgo() {
 		log.debug("pauseAlgo");
 		paused = true;
 	}
-	
-	public void resumeAlgo(){
+
+	public void resumeAlgo() {
 		log.debug("resumeAlgo");
 		paused = false;
 	}
-	
+
 	public void stopRunning() {
 		stop = true;
 	}
 
 	public void run() {
 		stop = false;
-		LinkedList<AbstractFloor> path = compute(GridControler.getInstance().getStartPoint(),
-				GridControler.getInstance().getEndPoint());
-		
-		if (!stop && path != null){
+		LinkedList<AbstractFloor> path = compute(GridControler.getInstance()
+				.getStartPoint(), GridControler.getInstance().getEndPoint());
+
+		if (!stop && path != null) {
 			GridControler.getInstance().drawPath(path, Color.GREEN);
 		}
 	}

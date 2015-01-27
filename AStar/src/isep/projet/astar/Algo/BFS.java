@@ -55,11 +55,10 @@ public class BFS extends AbstractAlgo {
 					previous.put(neighboor, current);
 				}
 			}
-			
+
 			// Increase IHM step counter
 			GridControler.getInstance().nextStep();
-			
-			
+
 			try {
 				Thread.sleep(GridControler.getInstance().getTimerValue());
 			} catch (InterruptedException e) {
@@ -69,18 +68,19 @@ public class BFS extends AbstractAlgo {
 		}
 
 		log.info("end " + this);
-		if(!checkContinues()) return null;
+		if (!checkContinues())
+			return null;
 		log.info("compute path");
 		LinkedList<AbstractFloor> path = new LinkedList<>();
-		
+
 		current = EndPoint;
 		path.add(current);
-		
+
 		while (current != StartPoint) {
 			current = previous.get(current);
 			path.addFirst(current);
 		}
-		
+
 		return path;
 	}
 }

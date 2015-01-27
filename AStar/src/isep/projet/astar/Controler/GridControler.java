@@ -28,6 +28,10 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+/*
+ * This controler is the central class of the project. 
+ * It controls IHM and Algorithms.
+ */
 public class GridControler {
 
 	private static final Logger log = Logger.getLogger(GridControler.class);
@@ -43,15 +47,15 @@ public class GridControler {
 	private boolean isPaused;
 	private int timerValue;
 
+	// ********************************************//
+	// **************** Singleton *****************//
+	// ********************************************//
+	
 	private GridControler() {
 		initMapsList();
 		initAlgosList();
 		squares = new HashMap<>();
-	}
-
-	// ********************************************//
-	// ***************** Getters ******************//
-	// ********************************************//
+	}	
 
 	public static synchronized GridControler getInstance() {
 		if (instance == null) {
@@ -59,6 +63,10 @@ public class GridControler {
 		}
 		return instance;
 	}
+
+	// ********************************************//
+	// ***************** Getters ******************//
+	// ********************************************//
 
 	public synchronized AbstractFloor getStartPoint() {
 		return startPoint;
@@ -80,11 +88,6 @@ public class GridControler {
 		return algosList;
 	}
 
-	public synchronized void nextStep() {
-		stepCounter++;
-		mainFrame.getControlPanel().updateCounter(stepCounter);
-	}
-
 	public synchronized int getTimerValue() {
 		return timerValue;
 	}
@@ -92,6 +95,10 @@ public class GridControler {
 	// ********************************************//
 	// ***************** Controls *****************//
 	// ********************************************//
+	
+	/*
+	 * Called by algorithms to draw the result path in the IHM
+	 */
 	public void drawPath(LinkedList<AbstractFloor> path, Color color) {
 		int totalCoast = 0;
 		for (AbstractFloor square : path) {
@@ -156,6 +163,11 @@ public class GridControler {
 			timerValue = 100;
 		}
 	}
+	
+	public synchronized void nextStep() {
+		stepCounter++;
+		mainFrame.getControlPanel().updateCounter(stepCounter);
+	}
 
 	public void stop() {
 		runningAlgo.stopRunning();
@@ -192,6 +204,11 @@ public class GridControler {
 	// ********************************************//
 	// ***************** Private ******************//
 	// ********************************************//
+	
+	/*
+	 * Transforms a map in int[][] format into GridPanel
+	 * For each values this method draw an IHM representation of the square 
+	 */
 	private GridPanel loadMap(AbstractMap Map) {
 		GridPanel panel = new GridPanel(Map.getWidth(), Map.getHeight());
 		AbstractFloor pan;

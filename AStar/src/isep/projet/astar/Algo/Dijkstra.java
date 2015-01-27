@@ -41,19 +41,16 @@ public class Dijkstra extends AbstractAlgo {
 		Map<AbstractFloor, Integer> totCost = new HashMap<>();
 		AbstractFloor current = StartPoint;
 
-		// log.info("A la declaration, squares = " + squares.toString());
 		squares.add(new CoupleSquarePrio(StartPoint, 0));
-		// log.info("Apres ajout firstCouple, squares = " + squares.toString());
 
 		previous.put(StartPoint, null);
 		totCost.put(StartPoint, 0);
 
-		// log.info("start " + this);
 		while (current != EndPoint && !squares.isEmpty() && checkContinues()) {
 
-			log.info("avant remove, squares = " + squares.toString());
+			//log.info("avant remove, squares = " + squares.toString());
 			CoupleSquarePrio currentCouple = squares.remove();
-			log.info("apres remove, squares = " + squares.toString());
+			//log.info("apres remove, squares = " + squares.toString());
 
 			current = currentCouple.getSquare();
 
@@ -70,9 +67,9 @@ public class Dijkstra extends AbstractAlgo {
 
 						totCost.put(neighboor, new_cost);
 						int priority = new_cost;
-						log.info("avant ajout, squares = " + squares.toString());
+						//log.info("avant ajout, squares = " + squares.toString());
 						squares.add(new CoupleSquarePrio(neighboor, priority));
-						log.info("apres ajout, squares = " + squares.toString());
+						//log.info("apres ajout, squares = " + squares.toString());
 						previous.put(neighboor, current);
 					}
 				}
